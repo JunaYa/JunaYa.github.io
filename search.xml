@@ -6,14 +6,14 @@
     <entry>
       <title><![CDATA[First Beijing]]></title>
       <url>http://junaya.github.io/2016/10/30/First-Beijing/</url>
-      <content type="text"></content>
+      <content type="text"><![CDATA[春夏秋冬]]></content>
     </entry>
 
     
     <entry>
-      <title><![CDATA[Hello World]]></title>
-      <url>http://junaya.github.io/2016/10/29/hello-world/</url>
-      <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+      <title><![CDATA[格物致知]]></title>
+      <url>http://junaya.github.io/2016/10/29/%E6%A0%BC%E7%89%A9%E8%87%B4%E7%9F%A5/</url>
+      <content type="text"><![CDATA[大学之道，在明明德，在亲民，在止于至善。知止而后有定；定而后能静；静而后能安；安而后能虑；虑而后能得。物有本末，事有终始。知所先后，则近道矣。古之欲明明德于天下者，先治其国；欲治其国者，先齐其家； 欲齐其家者，先修其身；欲修其身者，先正其心；欲正其心者，先诚其意；欲诚其意者，先致其知；致知在格物。 物格而后知至；知至而后意诚；意诚而后心正；心正而后身修；身修而后家齐；家齐而后国治；国治而后天下平。 自天子以至于庶人，壹是皆以修身为本。其本乱而未治者否矣。其所厚者薄，而其所薄者厚，未之有也！]]></content>
     </entry>
 
     
