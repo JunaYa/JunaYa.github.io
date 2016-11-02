@@ -76,7 +76,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="数据结构," />
+  <meta name="keywords" content="数据结构 java," />
 
 
 
@@ -126,7 +126,7 @@
 存储元素时还新增了一个索引列表，列表每一项包含关键字和数据元素存储地址或存储域的首地址
 
 散列">
-<meta property="og:updated_time" content="2016-10-31T15:48:07.000Z">
+<meta property="og:updated_time" content="2016-11-02T13:04:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构">
 <meta name="twitter:description" content="#数据结构
@@ -437,6 +437,28 @@
 <h2 id="线性表的链式存储-链表"><a href="#线性表的链式存储-链表" class="headerlink" title="线性表的链式存储-链表"></a>线性表的链式存储-链表</h2><blockquote>
 <p>概念：<br>链表是一种物理存储单元上非连续，非顺序的数据结构，数据元素的逻辑顺序是通过链表中的指针链接次序实现的。<br>组成：<br>一系列节点组成，可以在运行时动态生成（列表中每一个元素称为节点）<br>节点（元素）组成：<br>1，存储数据的数据域<br>2，存储下一个节点（元素）的指针域<br>时间复杂度<br>1，插入／删除  O（1）<br>2，查找一个节点／访问特定编号节点 O（n）<br>优点<br>克服数组需要需要预先知道数据大小的缺点，链表结构可以充分利用计算机内存空间，实现灵活的内存动态管理。<br>缺点<br> 没有数组随机读取优点，链表由于增加了节点指针域，空间开销表较大。链表允许插入和移除表上任意位置上的节点，但是不允许随机存取。<br>类型<br> 1，单向链表<br> 链表的方向是单向的。head 指针指向第一个成为表头节点，最后一个指向 null<br> 2，双向链表<br> 没个数据节点中有两个指针，分别指向直接后继和直接前驱，从任意节点可以访问它的前驱节点和后继节点<br> 3，循环链表<br>最后一个指针域指向头节点，整个链表形成一个环</p>
 </blockquote>
+<h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><blockquote>
+<p> 只从一端进一端出  汉诺塔<br>先进后出（FILO） ／ 后进先出（LIFO）</p>
+</blockquote>
+<h3 id="顺序栈"><a href="#顺序栈" class="headerlink" title="顺序栈"></a>顺序栈</h3><blockquote>
+<p>以数组实现<br>如栈需要注意栈是否已满<br>出栈需要注意栈是否为空</p>
+</blockquote>
+<h3 id="链式栈"><a href="#链式栈" class="headerlink" title="链式栈"></a>链式栈</h3><blockquote>
+<p>以单链表实现</p>
+<p>应用 ： 分割符匹配 ， 大数相加 ， 表达式求值 ， 栈与递归问题</p>
+</blockquote>
+<h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><blockquote>
+<p>从一端进从另一端出 ，排队买票<br>先进先出（FIFO)</p>
+</blockquote>
+<h3 id="循环顺序对列"><a href="#循环顺序对列" class="headerlink" title="循环顺序对列"></a>循环顺序对列</h3><blockquote>
+<p>数组实现<br>需要注意判断是否为空是否已满，已满可能是假满<br>1）少用一个存储单元，当容量为 maxSize ，队列空时 front == rear , 队列满时 front == (rear +1)%maxSize<br>2)设置一个标记为，flag 初始值为 0， 当入队成功 flag=1 ，当出队成功 flag = 0 ，<br> 所以当  队为空时 front == rear &amp;&amp; flag ==0 ,  队列满时 front == rear &amp;&amp;  flag = 1;<br>3）设置一个变量 num 当入队成功 num + 1 ,当出队成功 num - 1 ,队列为空时 num == 0  ,队列满时 num &gt; 0</p>
+</blockquote>
+<h3 id="链队"><a href="#链队" class="headerlink" title="链队"></a>链队</h3><blockquote>
+<p>单链表实现<br>注意出队时判断是否为null ，</p>
+</blockquote>
+<h3 id="优先级队列"><a href="#优先级队列" class="headerlink" title="优先级队列"></a>优先级队列</h3><blockquote>
+<p>根据数据元素的优先级排队</p>
+</blockquote>
 
       
     </div>
@@ -459,7 +481,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/数据结构/" rel="tag">#数据结构</a>
+            <a href="/tags/数据结构-java/" rel="tag">#数据结构 java</a>
           
         </div>
       
@@ -638,7 +660,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑结构"><span class="nav-number">1.</span> <span class="nav-text">逻辑结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#集合"><span class="nav-number">1.1.</span> <span class="nav-text">集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性结构"><span class="nav-number">1.2.</span> <span class="nav-text">线性结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树形结构"><span class="nav-number">1.3.</span> <span class="nav-text">树形结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图形结构"><span class="nav-number">1.4.</span> <span class="nav-text">图形结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储结构"><span class="nav-number">2.</span> <span class="nav-text">存储结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#顺序存储"><span class="nav-number">2.1.</span> <span class="nav-text">顺序存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链式存储"><span class="nav-number">2.2.</span> <span class="nav-text">链式存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引存储"><span class="nav-number">2.3.</span> <span class="nav-text">索引存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#散列（哈希）存储"><span class="nav-number">2.4.</span> <span class="nav-text">散列（哈希）存储</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线性表"><span class="nav-number"></span> <span class="nav-text">线性表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线性表的顺序存储-顺序表"><span class="nav-number">1.</span> <span class="nav-text">线性表的顺序存储-顺序表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性表的链式存储-链表"><span class="nav-number">2.</span> <span class="nav-text">线性表的链式存储-链表</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑结构"><span class="nav-number">1.</span> <span class="nav-text">逻辑结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#集合"><span class="nav-number">1.1.</span> <span class="nav-text">集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性结构"><span class="nav-number">1.2.</span> <span class="nav-text">线性结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树形结构"><span class="nav-number">1.3.</span> <span class="nav-text">树形结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图形结构"><span class="nav-number">1.4.</span> <span class="nav-text">图形结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储结构"><span class="nav-number">2.</span> <span class="nav-text">存储结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#顺序存储"><span class="nav-number">2.1.</span> <span class="nav-text">顺序存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链式存储"><span class="nav-number">2.2.</span> <span class="nav-text">链式存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引存储"><span class="nav-number">2.3.</span> <span class="nav-text">索引存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#散列（哈希）存储"><span class="nav-number">2.4.</span> <span class="nav-text">散列（哈希）存储</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线性表"><span class="nav-number"></span> <span class="nav-text">线性表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线性表的顺序存储-顺序表"><span class="nav-number">1.</span> <span class="nav-text">线性表的顺序存储-顺序表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性表的链式存储-链表"><span class="nav-number">2.</span> <span class="nav-text">线性表的链式存储-链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#栈"><span class="nav-number">3.</span> <span class="nav-text">栈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#顺序栈"><span class="nav-number">3.1.</span> <span class="nav-text">顺序栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链式栈"><span class="nav-number">3.2.</span> <span class="nav-text">链式栈</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#队列"><span class="nav-number">4.</span> <span class="nav-text">队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#循环顺序对列"><span class="nav-number">4.1.</span> <span class="nav-text">循环顺序对列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链队"><span class="nav-number">4.2.</span> <span class="nav-text">链队</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优先级队列"><span class="nav-number">4.3.</span> <span class="nav-text">优先级队列</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
