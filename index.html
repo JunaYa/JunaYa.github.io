@@ -309,6 +309,240 @@
             
               
                 
+                <a class="post-title-link" href="/2016/11/05/Java-基础/" itemprop="url">
+                  Java 基础
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-05T09:13:31+08:00" content="2016-11-05">
+              2016-11-05
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/05/Java-基础/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/11/05/Java-基础/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>Java</li>
+</ul>
+<h2 id="int-和-Integer"><a href="#int-和-Integer" class="headerlink" title="int  和 Integer"></a>int  和 Integer</h2><p>Java 中的数据类型分为基本数据类型和复杂数据类型<br>从大的方面来说就是基本数据类型与其包装类的区别：<br>int 是基本类型，直接存数值，而integer是对象，用一个引用指向这个对象。如果要将 int 作为对象使用，需要使用 Integer 来声明对象。<br>类似的还有：float Float;double Double<br>使用范型<br>ArrayList<integer> al=new ArrayList();</integer></p>
+<h2 id="String-StringBuffer-StringBuilder"><a href="#String-StringBuffer-StringBuilder" class="headerlink" title="String StringBuffer StringBuilder"></a>String StringBuffer StringBuilder</h2><blockquote>
+<p>String 字符串常量</p>
+<p>StringBuffer 字符串变量（线程安全）</p>
+<p>StringBuilder 字符串变量（非线程安全）</p>
+<ul>
+<li><p>String 类型和 StringBuffer 类型的主要性能区别其实在于 String 是不可变的对象由 final 修饰, 因此在每次对 String 类型进行改变的时候其实都等同于生成了一个新的 String 对象，然后将指针指向新的 String 对象，所以经常改变内容的字符串最好不要用String ，因为每次生成对象都会对系统性能产生影响，特别当内存中无引用对象多了以后,JVM 的 GC 就会开始工作，那速度是一定会相当慢的。</p>
+</li>
+<li><p>StringBuffer 线程安全的可变字符序列。每次对自己本身操作，不生成新对象。如果是 String s = “this “ + “is “ +” string” ;, 那么在 JVM 中就会按照 String s = “this is string” ; 处理。如果是</p>
+</li>
+</ul>
+</blockquote>
+<pre><code>for(String s:Strs){
+        temp += s;
+}
+
+//那么最好就是用 StringBuffer  来拼接。
+
+StringBuffer buffer = new StringBuffer();
+for(String s:Strs){
+        buffer.append(s);
+}
+</code></pre><blockquote>
+<ul>
+<li>StringBuilder 一个可变的字符序列是5.0新增的。此类提供一个与 StringBuffer 兼容的 API，但不保证同步。该类被设计用作 StringBuffer 的一个简易替换，用在字符串缓冲区被单个线程使用的时候（这种情况很普遍）,因为在大多数实现中，它比 StringBuffer 要快。</li>
+</ul>
+</blockquote>
+<h2 id="抽象类接口区别"><a href="#抽象类接口区别" class="headerlink" title="抽象类接口区别"></a>抽象类接口区别</h2><table>
+<thead>
+<tr>
+<th>对比</th>
+<th style="text-align:right">接口</th>
+<th style="text-align:center">抽象类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>默认的方法实现</td>
+<td style="text-align:right">默认的方法实现完全是抽象的</td>
+<td style="text-align:center">不存在实现方法</td>
+</tr>
+<tr>
+<td>实现 子类</td>
+<td style="text-align:right">extends 关键字，如果子类不是抽象类的话，它需要提供抽象类中所有声明的方法的实现</td>
+<td style="text-align:center">implement 关键字，需要提供接口中所有声明的方法的实现</td>
+</tr>
+<tr>
+<td>构造器</td>
+<td style="text-align:right">可以有</td>
+<td style="text-align:center">不可以</td>
+</tr>
+<tr>
+<td>与正常 Java 类的区别</td>
+<td style="text-align:right">除了不能实现抽象方法 ，其他相同</td>
+<td style="text-align:center">完全不同</td>
+</tr>
+<tr>
+<td>访问修饰符</td>
+<td style="text-align:right">public、protected 和 default</td>
+<td style="text-align:center">public</td>
+</tr>
+<tr>
+<td>main方法</td>
+<td style="text-align:right">有 main 方法并能运行</td>
+<td style="text-align:center">没有</td>
+</tr>
+<tr>
+<td>多继承</td>
+<td style="text-align:right">只能有一个</td>
+<td style="text-align:center">可以有多个</td>
+</tr>
+<tr>
+<td>速度</td>
+<td style="text-align:right">较快</td>
+<td style="text-align:center">较慢，需要时间去寻找在类中实现的方法</td>
+</tr>
+<tr>
+<td>添加新方法</td>
+<td style="text-align:right">可以提供默认实现</td>
+<td style="text-align:center">必须改变实现接口类</td>
+</tr>
+</tbody>
+</table>
+<h2 id="HashMap-HashTable"><a href="#HashMap-HashTable" class="headerlink" title="HashMap  HashTable"></a>HashMap  HashTable</h2><table>
+<thead>
+<tr>
+<th>对比</th>
+<th style="text-align:right">HashMap</th>
+<th style="text-align:center">HashTable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>继承实现</td>
+<td style="text-align:right">继承于AbstractMap,AbstractMap完成了Map接口</td>
+<td style="text-align:center">基于陈旧的Dictionary类，完成了Map接口</td>
+</tr>
+<tr>
+<td>安全</td>
+<td style="text-align:right">非线程同步，不安全</td>
+<td style="text-align:center">线程同步，安全</td>
+</tr>
+<tr>
+<td>对null的处理</td>
+<td style="text-align:right">值不允许 null</td>
+<td style="text-align:center">值允许 null ,(一个或多个健对应该值)</td>
+</tr>
+<tr>
+<td>方法不同</td>
+<td style="text-align:right">contains(Object value)</td>
+<td style="text-align:center">containsValue(Object value)</td>
+</tr>
+<tr>
+<td>遍历</td>
+<td style="text-align:right">Enumeration</td>
+<td style="text-align:center">Iterator</td>
+</tr>
+<tr>
+<td>增长率</td>
+<td style="text-align:right">默认 11 ，old * 2+1</td>
+<td style="text-align:center">一定是2的指数</td>
+</tr>
+<tr>
+<td>哈希值的使用</td>
+<td style="text-align:right">直接使用对象的hashCode</td>
+<td style="text-align:center">重新计算hash值，而且用与代替求模</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ArrayMap"><a href="#ArrayMap" class="headerlink" title="ArrayMap"></a>ArrayMap</h2><p> 用两个数组来模拟Map，第一个数组存放存放item的hash值，第二数组是把key，value连续的存放在数组里，通过先算hash在第一个数组里找到它的hash index，根据这个index在去第二个数组里找到这个key-value。</p>
+<h2 id="ArrayList-LinkedList"><a href="#ArrayList-LinkedList" class="headerlink" title="ArrayList  LinkedList"></a>ArrayList  LinkedList</h2><p>1.ArrayList是实现了基于动态数组的数据结构，LinkedList基于链表的数据结构。<br>2.对于随机访问get和set，ArrayList觉得优于LinkedList，因为LinkedList要移动指针。<br>3.对于新增和删除操作add和remove，LinedList比较占优势，因为ArrayList要移动数据。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/10/31/数据结构/" itemprop="url">
                   数据结构
                 </a>
@@ -719,7 +953,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -774,6 +1008,24 @@
         
 
         
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://drakeet.me/" title="drakeet" target="_blank">drakeet</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.zhaiyifan.cn/" title="markzhai" target="_blank">markzhai</a>
+                </li>
+              
+            </ul>
+          </div>
         
 
       </section>
