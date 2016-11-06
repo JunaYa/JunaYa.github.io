@@ -76,7 +76,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Java,排序算法," />
 
 
 
@@ -92,15 +92,31 @@
 
 
 
-<meta name="description" content="格物致知">
-<meta property="og:type" content="website">
-<meta property="og:title" content="JunaYa 个人博客">
-<meta property="og:url" content="http://junaya.github.io/tags/冬/index.html">
+<meta name="description" content="参考有直观的排序过程，多种语言
+交换排序冒泡public static void bubbleSort(int[] array) {
+    int len = array.length;
+    for (int i = 0; i &amp;lt; len; i++) {
+        for (int j = 1; j &amp;lt; len - i; j++) {
+            if (arr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="排序算法">
+<meta property="og:url" content="http://junaya.github.io/2016/11/06/排序算法/index.html">
 <meta property="og:site_name" content="JunaYa 个人博客">
-<meta property="og:description" content="格物致知">
+<meta property="og:description" content="参考有直观的排序过程，多种语言
+交换排序冒泡public static void bubbleSort(int[] array) {
+    int len = array.length;
+    for (int i = 0; i &amp;lt; len; i++) {
+        for (int j = 1; j &amp;lt; len - i; j++) {
+            if (arr">
+<meta property="og:updated_time" content="2016-11-06T08:07:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JunaYa 个人博客">
-<meta name="twitter:description" content="格物致知">
+<meta name="twitter:title" content="排序算法">
+<meta name="twitter:description" content="参考有直观的排序过程，多种语言
+交换排序冒泡public static void bubbleSort(int[] array) {
+    int len = array.length;
+    for (int i = 0; i &amp;lt; len; i++) {
+        for (int j = 1; j &amp;lt; len - i; j++) {
+            if (arr">
 
 
 
@@ -121,10 +137,10 @@
 
 
 
-  <link rel="canonical" href="http://junaya.github.io/tags/冬/"/>
+  <link rel="canonical" href="http://junaya.github.io/2016/11/06/排序算法/"/>
 
 
-  <title> 标签: 冬 | JunaYa 个人博客 </title>
+  <title> 排序算法 | JunaYa 个人博客 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -164,7 +180,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right  ">
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -285,46 +301,349 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        冬
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                排序算法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-06T16:00:17+08:00" content="2016-11-06">
+              2016-11-06
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/06/排序算法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/11/06/排序算法/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
+      
+        <p>参考<br><a href="https://algorithm.yuanbin.me/zh-hans/basics_sorting/insertion_sort.html" target="_blank" rel="external">有直观的排序过程，多种语言</a></p>
+<h3 id="交换排序"><a href="#交换排序" class="headerlink" title="交换排序"></a>交换排序</h3><h3 id="冒泡"><a href="#冒泡" class="headerlink" title="冒泡"></a>冒泡</h3><pre><code>public static void bubbleSort(int[] array) {
+    int len = array.length;
+    for (int i = 0; i &lt; len; i++) {
+        for (int j = 1; j &lt; len - i; j++) {
+            if (array[j - 1] &gt; array[j]) {
+                int temp = array[j - 1];
+                array[j - 1] = array[j];
+                array[j] = temp;
+            }
+        }
+    }
+}
+</code></pre><p>持续比较相邻元素，大的挪到后面，因此大的会逐步往后挪<br>平均情况与最坏情况均为 $O(n^2)$ , 使用了 temp 作为临时交换变量，空间复杂度为 O(1)</p>
+<h4 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h4><pre><code> public static void insertionSort(int[] array) {
+    int len = array.length;
+    int i = 0 ;
+    for ( i = 0; i &lt; len; i++) {
+        int index = i, array_i = array[i];
+        while (index &gt; 0 &amp;&amp; array[index - 1] &gt; array_i) {
+            array[index] = array[index - 1];
+            index -= 1;
+        }
+        array[index] = array_i;
+    }
+}
+</code></pre><p>1,从第一个元素开始，该元素可认为已排序<br>2,取下一个元素，对已排序数组从后往前扫描<br>3,若从排序数组中取出的元素大于新元素，则移至下一位置<br>4,重复步骤3，直至找到已排序元素小于或等于新元素的位置<br>5,插入新元素至该位置<br>6,重复2~5</p>
+<h4 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h4><p>伪代码</p>
+<pre><code>void SelectedSort(int List[] , int N){
+  //将 N 个整数 List[0] ... List[N] 进行递减排序
+  for ( i = 0 ; i &lt; N ; l ++ ){
+   MinPosition = findMin( List ,i , N-1 );
+   // 从 List [i] 到 list[N-1] 中找最小元，并把它的位置给 MinPosition
+   Swap（ List[i] ,List[MinPositino] );
+   // 将未排序部分的最小元换到这部分最后位置
+  }
+}
 
-      <h1 class="post-title">
+ public static void selectionSort(int[] array) {
+    int len = array.length;
+    int i = 0, j = 0;
+    for ( i = 0 ; i &lt; len; i++) {
+
+        int min_index = i;
+        for ( j = i + 1; j &lt; len; j++) {
+            if (array[j] &lt; array[min_index]) {
+                min_index = j;
+            }
+        }
+        int temp = array[min_index];
+        array[min_index] = array[i];
+        array[i] = temp;
+    }
+}
+</code></pre><p>不断地选择剩余元素中的最小者<br>1,找到数组中最小元素并将其和数组第一个元素交换位置。<br>2,在剩下的元素中找到最小元素并将其与数组第二个元素交换，直至整个数组排序。</p>
+<p>比较次数=(N-1)+(N-2)+(N-3)+…+2+1~N^2/2<br>交换次数=N<br>运行时间与输入无关<br>数据移动最少</p>
+<h4 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h4><pre><code>public static void quickSort(int[] array) {
+    quickSort(array, 0, array.length - 1);
+}
+
+public static void quickSort(int[] array, int l, int u) {
+
+    if (l &gt;= u) return;
+    int m = l;
+    for (int i = l + 1; i &lt;= u; i++) {
+        if (array[i] &lt; array[l]) {
+            m += 1;
+            int temp = array[m];
+            array[m] = array[i];
+            array[i] = temp;
+        }
+    }
+    // swap between array[m] and array[l]
+    // put pivot in the mid
+    int temp = array[m];
+    array[m] = array[l];
+    array[l] = temp;
+
+    quickSort(array, l, m - 1);
+    quickSort(array, m + 1, u);
+}
+</code></pre><p>1,定基准——首先随机选择一个元素最为基准<br>2,划分区——所有比基准小的元素置于基准左侧，比基准大的元素置于右侧<br>3,递归调用——递归地调用此切分过程</p>
+<h4 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h4><p>分而治之<br>原地归并</p>
+<pre><code> public static void mergeSort(int[] array) {
+    sort(array, 0, array.length - 1);
+}
+
+
+public static void sort(int[] array, int low, int high) {
+    if (high &lt;= low) return;
+    int mid = low + (high - low) / 2;
+    sort(array, low, mid);
+    sort(array, mid + 1, high);
+    merge(array, low, mid, high);
+}
+
+private static void merge(int[] array, int low, int mid, int high) {
+    int[] helper = new int[array.length];
+    // copy array to helper
+    for (int k = low; k &lt;= high; k++) {
+        helper[k] = array[k];
+    }
+    // merge array[low...mid] and array[mid + 1...high]
+    int i = low, j = mid + 1;
+    for (int k = low; k &lt;= high; k++) {
+        // k means current location
+        if (i &gt; mid) {
+            // no item in left part
+            array[k] = helper[j];
+            j++;
+        } else if (j &gt; high) {
+            // no item in right part
+            array[k] = helper[i];
+            i++;
+        } else if (helper[i] &gt; helper[j]) {
+            // get smaller item in the right side
+            array[k] = helper[j];
+            j++;
+        } else {
+            // get smaller item in the left side
+            array[k] = helper[i];
+            i++;
+        }
+    }
+}
+</code></pre><h4 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h4><pre><code>public void sort(int[] nums, boolean ascending) {
+    if (ascending) {
+        // build max heap
+        maxHeap(nums, nums.length);
+        // heap sort
+        for (int i = nums.length - 1; i &gt;= 0; i--) {
+            int temp = nums[0];
+            nums[0] = nums[i];
+            nums[i] = temp;
+            // reconstruct max heap
+            maxHeap(nums, i);
+        }
+    } else {
+        // build min heap
+        minHeap(nums, nums.length);
+        // heap sort
+        for (int i = nums.length - 1; i &gt;= 0; i--) {
+            int temp = nums[0];
+            nums[0] = nums[i];
+            nums[i] = temp;
+            // reconstruct min heap
+            minHeap(nums, i);
+        }
+    }
+}
+
+// sign = 1 ==&gt; min-heap, sign = -1 ==&gt; max-heap
+private void siftDown(int[] nums, int k, int size, int sign) {
+    int half = (size &gt;&gt;&gt; 1);
+    while (k &lt; half) {
+        int index = k;
+        // left leaf node search
+        int l = (k &lt;&lt; 1) + 1;
+        if (l &lt; size &amp;&amp; (sign * nums[l]) &lt; (sign * nums[index])) {
+            index = l;
+        }
+        // right leaf node search
+        int r = l + 1;
+        if (r &lt; size &amp;&amp; (sign * nums[r]) &lt; (sign * nums[index])) {
+            index = r;
+        }
+        // already heapify
+        if (k == index) break;
+        // keep the root node the smallest/largest
+        int temp = nums[k];
+        nums[k] = nums[index];
+        nums[index] = temp;
+        // adjust next index
+        k = index;
+    }
+}
+
+private void minHeap(int[] nums, int size) {
+    heapify(nums, size, 1);
+}
+
+private void maxHeap(int[] nums, int size) {
+    heapify(nums, size, -1);
+}
+
+private void heapify(int[] nums, int size, int sign) {
+    for (int i = size / 2; i &gt;= 0; i--) {
+        siftDown(nums, i, size, sign);
+    }
+}
+</code></pre><ul>
+<li>[ ]  希尔</li>
+<li>[ ]  线性排序</li>
+<li><p>[ ]  桶排序</p>
+<h2 id="查找算法"><a href="#查找算法" class="headerlink" title="查找算法"></a>查找算法</h2></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/10/30/First-Beijing/" itemprop="url">
-              
-                <span itemprop="name">First Beijing</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-10-30T02:07:44+08:00"
-              content="2016-10-30" >
-          10-30
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag">#Java</a>
+          
+            <a href="/tags/排序算法/" rel="tag">#排序算法</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/05/Java-基础/" rel="next" title="Java 基础">
+                <i class="fa fa-chevron-left"></i> Java 基础
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -332,6 +651,17 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -351,8 +681,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -440,6 +779,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#交换排序"><span class="nav-number">1.</span> <span class="nav-text">交换排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#冒泡"><span class="nav-number">2.</span> <span class="nav-text">冒泡</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#插入排序"><span class="nav-number">2.1.</span> <span class="nav-text">插入排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选择排序"><span class="nav-number">2.2.</span> <span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快速排序"><span class="nav-number">2.3.</span> <span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#归并排序"><span class="nav-number">2.4.</span> <span class="nav-text">归并排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#堆排序"><span class="nav-number">2.5.</span> <span class="nav-text">堆排序</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找算法"><span class="nav-number"></span> <span class="nav-text">查找算法</span></a></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -536,6 +886,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
 
   
 
@@ -552,9 +906,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'junaya';
-      var disqus_identifier = 'tags/冬/index.html';
-      var disqus_title = "";
-      var disqus_url = '';
+      var disqus_identifier = '2016/11/06/排序算法/';
+      var disqus_title = "排序算法";
+      var disqus_url = 'http://junaya.github.io/2016/11/06/排序算法/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
@@ -565,6 +919,13 @@
       }
 
       run_disqus_script('count.js');
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
       
     </script>
   
