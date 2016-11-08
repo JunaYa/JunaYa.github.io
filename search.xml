@@ -4,6 +4,13 @@
   
     
     <entry>
+      <title><![CDATA[Android ViewStub 的重复使用]]></title>
+      <url>http://junaya.cn/2016/11/08/Android-ViewStub-%E7%9A%84%E9%87%8D%E5%A4%8D%E4%BD%BF%E7%94%A8/</url>
+      <content type="text"><![CDATA[在项目中使用的时候遇到的问题以及解决，做以记录。 项目文件地址https://github.com/JunaYa/Giraffe/blob/master/app/src/main/java/com/aya/giraffe/module/content/NoteListFragment.java 布局使用的是 DataBinding &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; &lt;layout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt; &lt;data&gt; &lt;variable name=&quot;viewModel&quot; type=&quot;com.aya.giraffe.module.content.NoteListViewModel&quot;/&gt; &lt;/data&gt; &lt;LinearLayout android:layout_width=&quot;match_parent&quot; android:layout_height=&quot;match_parent&quot; android:orientation=&quot;vertical&quot; &gt; &lt;ViewStub android:id=&quot;@+id/stub&quot; android:layout_width=&quot;match_parent&quot; android:layout_height=&quot;match_parent&quot; android:inflatedId=&quot;@+id/subTree&quot; android:layout=&quot;@layout/stub_empty_view&quot;/&gt; &lt;android.support.v7.widget.RecyclerView android:id=&quot;@+id/recycler&quot; android:layout_width=&quot;match_parent&quot; android:layout_height=&quot;match_parent&quot;/&gt; &lt;/LinearLayout&gt; &lt;/layout&gt; 这里所说的重复使用场景是，比如获取数据时，数据为空，或者数据请求出错。这是如果使用 ViewStub 的话，就要这样使用 mBinding.stub.getViewStub().inflate(); 因为我有删除操作，当我把数据清空时，需要再次显示空数据提示。因为 ViewStub 的作用就是 inflate 一次，就是把其中的 android:layout=”@layout/stub_empty_view” 布局添加到自己身上，把自己移除，当你再次想要 inflate 的时候，会返回一个空。这是只能通过操作已经添加上来的 view 来操纵显示隐藏或其他功能。 mBinding.stub.getRoot().setVisibility(View.GONE);]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[Java 后台开发之---小蓝图]]></title>
       <url>http://junaya.cn/2016/11/07/Java-%E5%90%8E%E5%8F%B0%E5%BC%80%E5%8F%91%E4%B9%8B-%E5%B0%8F%E8%93%9D%E5%9B%BE/</url>
       <content type="text"><![CDATA[有机会能参与大神的自己项目，而且这个团队有这么对牛人。这是个非常好的机会。但是看到服务端的代码的时候，自己尝试看了看，也是这添加代码。结果没有跑通， 所以在网上查看了相关的资料。所以决定从开始把相关知识的学习，作为博客类似的笔记记录下来，分享于此，有助于推动自己的不断努力，也希望能帮助到想要一起学习 Java 后台开发的朋友。因为自己是做安卓开发的，对于 gradle 构建项目比较喜欢。所以学习的练习项目打算做一个自己的博客后台，后续可能会学习 react 前端，也可以把接口拿来使用。 自己最近也在学习 react-native 。学习的比较多， 这里一把手，那里又一把手，不亦乐乎。学习这些的时候呢比较喜欢做一个小项目来边学边做 ，因为语言规范好学 ，在用到的时候就可以学习。初期简单的过一遍就可以。在慕课网又看到一系列的 Java 开发课程，自己也在学习该课程。 从零开始的 Java 后台开发， 这一些列讲学习使用 [ ] Spring [ ] Spring Security [ ] Spring Boot [ ] Spring Web [ ] Spring JDBC [ ] Spring Boot Devtools [ ] Spring MVC [ ] Spring Actuator [ ] H2 [ ] MyBatis [x] MySQL]]></content>
