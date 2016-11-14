@@ -644,6 +644,8 @@ mysql -D 数据库名 -u root -p
 
 // 登录后
 use 数据库名
+</code></pre><h3 id="展示当前数据库的表结构"><a href="#展示当前数据库的表结构" class="headerlink" title="展示当前数据库的表结构"></a>展示当前数据库的表结构</h3><pre><code>show tables
+</code></pre><h3 id="查看表创建的过程"><a href="#查看表创建的过程" class="headerlink" title="查看表创建的过程"></a>查看表创建的过程</h3><pre><code>show create table 表名
 </code></pre><h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><pre><code>CREATE TABLE student (
   uid       INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   username  VARCHAR(255) NOT NULL UNIQUE,
