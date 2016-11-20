@@ -76,7 +76,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Java,排序算法," />
+  <meta name="keywords" content="OOM,Giraffe,内部类," />
 
 
 
@@ -92,31 +92,37 @@
 
 
 
-<meta name="description" content="参考有直观的排序过程，多种语言
-交换排序冒泡public static void bubbleSort(int[] array) {
-    int len = array.length;
-    for (int i = 0; i &amp;lt; len; i++) {
-        for (int j = 1; j &amp;lt; len - i; j++) {
-            if (arr">
+<meta name="description" content="#记在“使用剪贴版快捷创建 note” 中使用不当造成的内存泄漏问题
+项目地址 https://github.com/JunaYa/Giraffe 
+在提交版本中能看提交的历史，使用 LeakCanary 检测
+在代码中我是如下实现
+首先声明 ClipboardManager
+private ClipboardManager clipboard;
+在 onCreateView() 中实例 Clip">
 <meta property="og:type" content="article">
-<meta property="og:title" content="排序算法">
-<meta property="og:url" content="http://junaya.cn/2016/11/06/排序算法/index.html">
+<meta property="og:title" content="OOM之Giraffe 记事本中使用ClipboardManager不当">
+<meta property="og:url" content="http://junaya.cn/2016/11/20/OOM之Giraffe-记事本中使用ClipboardManager不当/index.html">
 <meta property="og:site_name" content="JunaYa 个人博客">
-<meta property="og:description" content="参考有直观的排序过程，多种语言
-交换排序冒泡public static void bubbleSort(int[] array) {
-    int len = array.length;
-    for (int i = 0; i &amp;lt; len; i++) {
-        for (int j = 1; j &amp;lt; len - i; j++) {
-            if (arr">
-<meta property="og:updated_time" content="2016-11-06T08:07:21.000Z">
+<meta property="og:description" content="#记在“使用剪贴版快捷创建 note” 中使用不当造成的内存泄漏问题
+项目地址 https://github.com/JunaYa/Giraffe 
+在提交版本中能看提交的历史，使用 LeakCanary 检测
+在代码中我是如下实现
+首先声明 ClipboardManager
+private ClipboardManager clipboard;
+在 onCreateView() 中实例 Clip">
+<meta property="og:image" content="https://leanote.com/api/file/getImage?fileId=58306ecbab644137810057b2">
+<meta property="og:image" content="https://leanote.com/api/file/getImage?fileId=58307484ab644137810057ed">
+<meta property="og:updated_time" content="2016-11-20T02:00:43.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="排序算法">
-<meta name="twitter:description" content="参考有直观的排序过程，多种语言
-交换排序冒泡public static void bubbleSort(int[] array) {
-    int len = array.length;
-    for (int i = 0; i &amp;lt; len; i++) {
-        for (int j = 1; j &amp;lt; len - i; j++) {
-            if (arr">
+<meta name="twitter:title" content="OOM之Giraffe 记事本中使用ClipboardManager不当">
+<meta name="twitter:description" content="#记在“使用剪贴版快捷创建 note” 中使用不当造成的内存泄漏问题
+项目地址 https://github.com/JunaYa/Giraffe 
+在提交版本中能看提交的历史，使用 LeakCanary 检测
+在代码中我是如下实现
+首先声明 ClipboardManager
+private ClipboardManager clipboard;
+在 onCreateView() 中实例 Clip">
+<meta name="twitter:image" content="https://leanote.com/api/file/getImage?fileId=58306ecbab644137810057b2">
 
 
 
@@ -137,10 +143,10 @@
 
 
 
-  <link rel="canonical" href="http://junaya.cn/2016/11/06/排序算法/"/>
+  <link rel="canonical" href="http://junaya.cn/2016/11/20/OOM之Giraffe-记事本中使用ClipboardManager不当/"/>
 
 
-  <title> 排序算法 | JunaYa 个人博客 </title>
+  <title> OOM之Giraffe 记事本中使用ClipboardManager不当 | JunaYa 个人博客 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -322,7 +328,7 @@
             
             
               
-                排序算法
+                OOM之Giraffe 记事本中使用ClipboardManager不当
               
             
           </h1>
@@ -334,8 +340,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-06T16:00:17+08:00" content="2016-11-06">
-              2016-11-06
+            <time itemprop="dateCreated" datetime="2016-11-20T09:59:45+08:00" content="2016-11-20">
+              2016-11-20
             </time>
           </span>
 
@@ -345,8 +351,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/11/06/排序算法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/11/06/排序算法/" itemprop="commentsCount"></span>
+                <a href="/2016/11/20/OOM之Giraffe-记事本中使用ClipboardManager不当/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/11/20/OOM之Giraffe-记事本中使用ClipboardManager不当/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -369,203 +375,83 @@
       
 
       
-        <p>参考<br><a href="https://algorithm.yuanbin.me/zh-hans/basics_sorting/insertion_sort.html" target="_blank" rel="external">有直观的排序过程，多种语言</a></p>
-<h3 id="交换排序"><a href="#交换排序" class="headerlink" title="交换排序"></a>交换排序</h3><h3 id="冒泡"><a href="#冒泡" class="headerlink" title="冒泡"></a>冒泡</h3><pre><code>public static void bubbleSort(int[] array) {
-    int len = array.length;
-    for (int i = 0; i &lt; len; i++) {
-        for (int j = 1; j &lt; len - i; j++) {
-            if (array[j - 1] &gt; array[j]) {
-                int temp = array[j - 1];
-                array[j - 1] = array[j];
-                array[j] = temp;
+        <p>#记在“使用剪贴版快捷创建 note” 中使用不当造成的内存泄漏问题</p>
+<p><a href="https://github.com/JunaYa/Giraffe/blob/master/app/src/main/java/com/aya/giraffe/module/main/MainActivity.java" target="_blank" rel="external">项目地址 https://github.com/JunaYa/Giraffe </a></p>
+<p>在提交版本中能看提交的历史，<br>使用 LeakCanary 检测</p>
+<p>在代码中我是如下实现</p>
+<p>首先声明 ClipboardManager</p>
+<pre><code>private ClipboardManager clipboard;
+</code></pre><p>在 onCreateView() 中实例 ClipboardManager 并注册剪贴版监听事件</p>
+<pre><code>clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+    clipboard.addPrimaryClipChangedListener(onClipChangedListener);
+</code></pre><p>相应的在 onDestroy() 中反注册监听</p>
+<pre><code>clipboard.removePrimaryClipChangedListener(onClipChangedListener);
+</code></pre><p>剪贴板监听声明并实现内容监听的处理</p>
+<pre><code>private OnPrimaryClipChangedListener onClipChangedListener = new OnPrimaryClipChangedListener() {
+    @Override
+    public void onPrimaryClipChanged() {
+        if (clipboard.hasPrimaryClip()){
+            if (clipboard.getPrimaryClipDescription().hasMimeType(MIMETYPE_TEXT_PLAIN)){
+                ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
+                String pasteData =  item.getText().toString();
+                mSheetPaste.registerData(pasteData,mPagerAdapter.getConfig());
+                mSheetPaste.show();
             }
         }
     }
-}
-</code></pre><p>持续比较相邻元素，大的挪到后面，因此大的会逐步往后挪<br>平均情况与最坏情况均为 $O(n^2)$ , 使用了 temp 作为临时交换变量，空间复杂度为 O(1)</p>
-<h4 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h4><pre><code> public static void insertionSort(int[] array) {
-    int len = array.length;
-    int i = 0 ;
-    for ( i = 0; i &lt; len; i++) {
-        int index = i, array_i = array[i];
-        while (index &gt; 0 &amp;&amp; array[index - 1] &gt; array_i) {
-            array[index] = array[index - 1];
-            index -= 1;
-        }
-        array[index] = array_i;
-    }
-}
-</code></pre><p>1,从第一个元素开始，该元素可认为已排序<br>2,取下一个元素，对已排序数组从后往前扫描<br>3,若从排序数组中取出的元素大于新元素，则移至下一位置<br>4,重复步骤3，直至找到已排序元素小于或等于新元素的位置<br>5,插入新元素至该位置<br>6,重复2~5</p>
-<h4 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h4><p>伪代码</p>
-<pre><code>void SelectedSort(int List[] , int N){
-  //将 N 个整数 List[0] ... List[N] 进行递减排序
-  for ( i = 0 ; i &lt; N ; l ++ ){
-   MinPosition = findMin( List ,i , N-1 );
-   // 从 List [i] 到 list[N-1] 中找最小元，并把它的位置给 MinPosition
-   Swap（ List[i] ,List[MinPositino] );
-   // 将未排序部分的最小元换到这部分最后位置
-  }
-}
-
- public static void selectionSort(int[] array) {
-    int len = array.length;
-    int i = 0, j = 0;
-    for ( i = 0 ; i &lt; len; i++) {
-
-        int min_index = i;
-        for ( j = i + 1; j &lt; len; j++) {
-            if (array[j] &lt; array[min_index]) {
-                min_index = j;
+};
+</code></pre><p>开始写的时候，根本没考虑太多， 还是 too young ！请看图</p>
+<p><img src="https://leanote.com/api/file/getImage?fileId=58306ecbab644137810057b2" alt="图片标题"></p>
+<p>当我操作点击 home 健出现的该问题</p>
+<p>我又这样尝试做了一次实验</p>
+<p>对于监听事件 onClipChangedListener 我在 onCreate() 中实力化；</p>
+<pre><code>clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+    onClipChangedListener = new OnPrimaryClipChangedListener() {
+        @Override
+        public void onPrimaryClipChanged() {
+            if (clipboard.hasPrimaryClip()){
+                if (clipboard.getPrimaryClipDescription().hasMimeType(MIMETYPE_TEXT_PLAIN)){
+                    ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
+                    String pasteData =  item.getText().toString();
+                    mSheetPaste.registerData(pasteData,mPagerAdapter.getConfig());
+                    mSheetPaste.show();
+                }
             }
         }
-        int temp = array[min_index];
-        array[min_index] = array[i];
-        array[i] = temp;
-    }
-}
-</code></pre><p>不断地选择剩余元素中的最小者<br>1,找到数组中最小元素并将其和数组第一个元素交换位置。<br>2,在剩下的元素中找到最小元素并将其与数组第二个元素交换，直至整个数组排序。</p>
-<p>比较次数=(N-1)+(N-2)+(N-3)+…+2+1~N^2/2<br>交换次数=N<br>运行时间与输入无关<br>数据移动最少</p>
-<h4 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h4><pre><code>public static void quickSort(int[] array) {
-    quickSort(array, 0, array.length - 1);
-}
+    };
+    clipboard.addPrimaryClipChangedListener(onClipChangedListener);
+</code></pre><p>同样多次操作 home 健，结果</p>
+<p><img src="https://leanote.com/api/file/getImage?fileId=58307484ab644137810057ed" alt="图片标题"></p>
+<p> 并不能起什么作用。这到底怎么回事呢？<br> 然后有做了如下尝试，</p>
+<pre><code>private class MyOnPrimaryClipChangedListener implements OnPrimaryClipChangedListener {
 
-public static void quickSort(int[] array, int l, int u) {
-
-    if (l &gt;= u) return;
-    int m = l;
-    for (int i = l + 1; i &lt;= u; i++) {
-        if (array[i] &lt; array[l]) {
-            m += 1;
-            int temp = array[m];
-            array[m] = array[i];
-            array[i] = temp;
+    @Override
+    public void onPrimaryClipChanged() {
+        if (clipboard.hasPrimaryClip()){
+            if (clipboard.getPrimaryClipDescription().hasMimeType(MIMETYPE_TEXT_PLAIN)){
+                ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
+                String pasteData =  item.getText().toString();
+                mSheetPaste.registerData(pasteData,mPagerAdapter.getConfig());
+                mSheetPaste.show();
+            }
         }
     }
-    // swap between array[m] and array[l]
-    // put pivot in the mid
-    int temp = array[m];
-    array[m] = array[l];
-    array[l] = temp;
-
-    quickSort(array, l, m - 1);
-    quickSort(array, m + 1, u);
-}
-</code></pre><p>1,定基准——首先随机选择一个元素最为基准<br>2,划分区——所有比基准小的元素置于基准左侧，比基准大的元素置于右侧<br>3,递归调用——递归地调用此切分过程</p>
-<h4 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h4><p>分而治之<br>原地归并</p>
-<pre><code> public static void mergeSort(int[] array) {
-    sort(array, 0, array.length - 1);
-}
+};
+</code></pre><p>把事件监听写成内部类实现监听，然后 clipboard 使用该</p>
+<pre><code>clipboard.addPrimaryClipChangedListener(new MyOnPrimaryClipChangedListener());
+</code></pre><p>这样就没问题了，因为又注册所以必要的反注册</p>
+<p>所以将内部类声明并实例化，</p>
+<pre><code>clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+    mPrimaryClipChangedListener = new MyOnPrimaryClipChangedListener();
+    clipboard.addPrimaryClipChangedListener(mPrimaryClipChangedListener);
 
 
-public static void sort(int[] array, int low, int high) {
-    if (high &lt;= low) return;
-    int mid = low + (high - low) / 2;
-    sort(array, low, mid);
-    sort(array, mid + 1, high);
-    merge(array, low, mid, high);
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+    clipboard.removePrimaryClipChangedListener(mPrimaryClipChangedListener);
 }
-
-private static void merge(int[] array, int low, int mid, int high) {
-    int[] helper = new int[array.length];
-    // copy array to helper
-    for (int k = low; k &lt;= high; k++) {
-        helper[k] = array[k];
-    }
-    // merge array[low...mid] and array[mid + 1...high]
-    int i = low, j = mid + 1;
-    for (int k = low; k &lt;= high; k++) {
-        // k means current location
-        if (i &gt; mid) {
-            // no item in left part
-            array[k] = helper[j];
-            j++;
-        } else if (j &gt; high) {
-            // no item in right part
-            array[k] = helper[i];
-            i++;
-        } else if (helper[i] &gt; helper[j]) {
-            // get smaller item in the right side
-            array[k] = helper[j];
-            j++;
-        } else {
-            // get smaller item in the left side
-            array[k] = helper[i];
-            i++;
-        }
-    }
-}
-</code></pre><h4 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h4><pre><code>public void sort(int[] nums, boolean ascending) {
-    if (ascending) {
-        // build max heap
-        maxHeap(nums, nums.length);
-        // heap sort
-        for (int i = nums.length - 1; i &gt;= 0; i--) {
-            int temp = nums[0];
-            nums[0] = nums[i];
-            nums[i] = temp;
-            // reconstruct max heap
-            maxHeap(nums, i);
-        }
-    } else {
-        // build min heap
-        minHeap(nums, nums.length);
-        // heap sort
-        for (int i = nums.length - 1; i &gt;= 0; i--) {
-            int temp = nums[0];
-            nums[0] = nums[i];
-            nums[i] = temp;
-            // reconstruct min heap
-            minHeap(nums, i);
-        }
-    }
-}
-
-// sign = 1 ==&gt; min-heap, sign = -1 ==&gt; max-heap
-private void siftDown(int[] nums, int k, int size, int sign) {
-    int half = (size &gt;&gt;&gt; 1);
-    while (k &lt; half) {
-        int index = k;
-        // left leaf node search
-        int l = (k &lt;&lt; 1) + 1;
-        if (l &lt; size &amp;&amp; (sign * nums[l]) &lt; (sign * nums[index])) {
-            index = l;
-        }
-        // right leaf node search
-        int r = l + 1;
-        if (r &lt; size &amp;&amp; (sign * nums[r]) &lt; (sign * nums[index])) {
-            index = r;
-        }
-        // already heapify
-        if (k == index) break;
-        // keep the root node the smallest/largest
-        int temp = nums[k];
-        nums[k] = nums[index];
-        nums[index] = temp;
-        // adjust next index
-        k = index;
-    }
-}
-
-private void minHeap(int[] nums, int size) {
-    heapify(nums, size, 1);
-}
-
-private void maxHeap(int[] nums, int size) {
-    heapify(nums, size, -1);
-}
-
-private void heapify(int[] nums, int size, int sign) {
-    for (int i = size / 2; i &gt;= 0; i--) {
-        siftDown(nums, i, size, sign);
-    }
-}
-</code></pre><ul>
-<li>[ ]  希尔</li>
-<li>[ ]  线性排序</li>
-<li><p>[ ]  桶排序</p>
-<h2 id="查找算法"><a href="#查找算法" class="headerlink" title="查找算法"></a>查找算法</h2></li>
-</ul>
-
+</code></pre>
       
     </div>
 
@@ -587,9 +473,11 @@ private void heapify(int[] nums, int size, int sign) {
       
         <div class="post-tags">
           
-            <a href="/tags/Java/" rel="tag">#Java</a>
+            <a href="/tags/OOM/" rel="tag">#OOM</a>
           
-            <a href="/tags/排序算法/" rel="tag">#排序算法</a>
+            <a href="/tags/Giraffe/" rel="tag">#Giraffe</a>
+          
+            <a href="/tags/内部类/" rel="tag">#内部类</a>
           
         </div>
       
@@ -598,17 +486,13 @@ private void heapify(int[] nums, int size, int sign) {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/05/Java-基础/" rel="next" title="Java 基础">
-                <i class="fa fa-chevron-left"></i> Java 基础
+              <a href="/2016/11/17/项目-Giraffe-记事本之-BottomSheetDialog-使用/" rel="next" title="项目 Giraffe 记事本之 BottomSheetDialog 使用">
+                <i class="fa fa-chevron-left"></i> 项目 Giraffe 记事本之 BottomSheetDialog 使用
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/07/MySQL-for-mac-的初识/" rel="prev" title="Java 后台开发之-（MySQL for mac 的初识）">
-                Java 后台开发之-（MySQL for mac 的初识） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -790,7 +674,7 @@ private void heapify(int[] nums, int size, int sign) {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#交换排序"><span class="nav-number">1.</span> <span class="nav-text">交换排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#冒泡"><span class="nav-number">2.</span> <span class="nav-text">冒泡</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#插入排序"><span class="nav-number">2.1.</span> <span class="nav-text">插入排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选择排序"><span class="nav-number">2.2.</span> <span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快速排序"><span class="nav-number">2.3.</span> <span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#归并排序"><span class="nav-number">2.4.</span> <span class="nav-text">归并排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#堆排序"><span class="nav-number">2.5.</span> <span class="nav-text">堆排序</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找算法"><span class="nav-number"></span> <span class="nav-text">查找算法</span></a></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>
@@ -910,9 +794,9 @@ private void heapify(int[] nums, int size, int sign) {
 
     <script type="text/javascript">
       var disqus_shortname = 'junaya';
-      var disqus_identifier = '2016/11/06/排序算法/';
-      var disqus_title = "排序算法";
-      var disqus_url = 'http://junaya.cn/2016/11/06/排序算法/';
+      var disqus_identifier = '2016/11/20/OOM之Giraffe-记事本中使用ClipboardManager不当/';
+      var disqus_title = "OOM之Giraffe 记事本中使用ClipboardManager不当";
+      var disqus_url = 'http://junaya.cn/2016/11/20/OOM之Giraffe-记事本中使用ClipboardManager不当/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
