@@ -76,7 +76,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android,project,Giraffe,ClipboardManager," />
+  <meta name="keywords" content="Android,project,Giraffe,AlarmManager,BroadcastReceiver,Service," />
 
 
 
@@ -94,20 +94,29 @@
 
 <meta name="description" content="具体使用请查看项目中
 项目地址 https://github.com/JunaYa/Giraffe 
-使用剪贴版快捷创建 note在其他应用中复制的内容将要作为 note 的 title 或者 content 。当用户把界面切换到 Giraffe 时，在 onResume()  中监听剪贴版的内容是否有改变。如果是新的内容，则将复制的内容作为 note 的 title 或者 content 由用户">
+在项目 Giraffe 中使用 BroadcastReceiver 实现事件提醒 。
+BroadcastReceiver标准广播是异步广播，广播一经发出去，所有广播接收器会同时收到该条广播，不分先后顺序。标准广播没法拦截，效率高。
+发送广播：
+Intent intent = new Intent(">
 <meta property="og:type" content="article">
-<meta property="og:title" content="项目 Giraffe 记事本之剪贴板应用">
-<meta property="og:url" content="http://junaya.cn/2016/11/17/项目-Giraffe-记事本之剪贴板应用/index.html">
+<meta property="og:title" content="项目 Giraffe 记事本之AlarmManager+BroadcastReceiver+Service 实现事件提醒">
+<meta property="og:url" content="http://junaya.cn/2016/11/18/项目-Giraffe-记事本之AlarmManager-BroadcastReceiver-Service-实现事件提醒/index.html">
 <meta property="og:site_name" content="JunaYa 个人博客">
 <meta property="og:description" content="具体使用请查看项目中
 项目地址 https://github.com/JunaYa/Giraffe 
-使用剪贴版快捷创建 note在其他应用中复制的内容将要作为 note 的 title 或者 content 。当用户把界面切换到 Giraffe 时，在 onResume()  中监听剪贴版的内容是否有改变。如果是新的内容，则将复制的内容作为 note 的 title 或者 content 由用户">
-<meta property="og:updated_time" content="2016-11-25T17:30:47.000Z">
+在项目 Giraffe 中使用 BroadcastReceiver 实现事件提醒 。
+BroadcastReceiver标准广播是异步广播，广播一经发出去，所有广播接收器会同时收到该条广播，不分先后顺序。标准广播没法拦截，效率高。
+发送广播：
+Intent intent = new Intent(">
+<meta property="og:updated_time" content="2016-11-25T17:30:43.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="项目 Giraffe 记事本之剪贴板应用">
+<meta name="twitter:title" content="项目 Giraffe 记事本之AlarmManager+BroadcastReceiver+Service 实现事件提醒">
 <meta name="twitter:description" content="具体使用请查看项目中
 项目地址 https://github.com/JunaYa/Giraffe 
-使用剪贴版快捷创建 note在其他应用中复制的内容将要作为 note 的 title 或者 content 。当用户把界面切换到 Giraffe 时，在 onResume()  中监听剪贴版的内容是否有改变。如果是新的内容，则将复制的内容作为 note 的 title 或者 content 由用户">
+在项目 Giraffe 中使用 BroadcastReceiver 实现事件提醒 。
+BroadcastReceiver标准广播是异步广播，广播一经发出去，所有广播接收器会同时收到该条广播，不分先后顺序。标准广播没法拦截，效率高。
+发送广播：
+Intent intent = new Intent(">
 
 
 
@@ -128,10 +137,10 @@
 
 
 
-  <link rel="canonical" href="http://junaya.cn/2016/11/17/项目-Giraffe-记事本之剪贴板应用/"/>
+  <link rel="canonical" href="http://junaya.cn/2016/11/18/项目-Giraffe-记事本之AlarmManager-BroadcastReceiver-Service-实现事件提醒/"/>
 
 
-  <title> 项目 Giraffe 记事本之剪贴板应用 | JunaYa 个人博客 </title>
+  <title> 项目 Giraffe 记事本之AlarmManager+BroadcastReceiver+Service 实现事件提醒 | JunaYa 个人博客 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -313,7 +322,7 @@
             
             
               
-                项目 Giraffe 记事本之剪贴板应用
+                项目 Giraffe 记事本之AlarmManager+BroadcastReceiver+Service 实现事件提醒
               
             
           </h1>
@@ -325,8 +334,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-17T18:52:10+08:00" content="2016-11-17">
-              2016-11-17
+            <time itemprop="dateCreated" datetime="2016-11-18T13:57:04+08:00" content="2016-11-18">
+              2016-11-18
             </time>
           </span>
 
@@ -336,8 +345,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/11/17/项目-Giraffe-记事本之剪贴板应用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/11/17/项目-Giraffe-记事本之剪贴板应用/" itemprop="commentsCount"></span>
+                <a href="/2016/11/18/项目-Giraffe-记事本之AlarmManager-BroadcastReceiver-Service-实现事件提醒/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/11/18/项目-Giraffe-记事本之AlarmManager-BroadcastReceiver-Service-实现事件提醒/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -362,61 +371,106 @@
       
         <p>具体使用请查看项目中</p>
 <p><a href="https://github.com/JunaYa/Giraffe/blob/master/app/src/main/java/com/aya/giraffe/module/main/MainActivity.java" target="_blank" rel="external">项目地址 https://github.com/JunaYa/Giraffe </a></p>
-<h1 id="使用剪贴版快捷创建-note"><a href="#使用剪贴版快捷创建-note" class="headerlink" title="使用剪贴版快捷创建 note"></a>使用剪贴版快捷创建 note</h1><p>在其他应用中复制的内容将要作为 note 的 title 或者 content 。当用户把界面切换到 Giraffe 时，在 onResume()  中监听剪贴版的内容是否有改变。如果是新的内容，则将复制的内容作为 note 的 title 或者 content 由用户选择，默认是作为 title 使用，并且用户可以选择将要创建的 note 的 type 。用户点击 选择的创建类型后就会弹出创建 note 的操作，并且用户选择复制的内容放在 title 或 content 的输入位置，补充完整内容，就可以创建保存。</p>
-<h2 id="主要知识点"><a href="#主要知识点" class="headerlink" title="主要知识点"></a>主要知识点</h2><p><a href="https://developer.android.com/guide/topics/text/copy-paste.html#Clipboard" target="_blank" rel="external">官方文档</a></p>
-<blockquote>
-<ul>
-<li>ClipboardManager</li>
-</ul>
-</blockquote>
-<p>剪贴版内容可以有三种</p>
-<ul>
-<li>URI 尽管允许任何 URI ，但是通常是 content provider URI</li>
-<li>Text ： 返回的是  CharSequence</li>
-<li><p>Intent  ：此数据类型允许您将应用程序快捷方式复制到剪贴板。然后用户可以将快捷方式粘贴到其应用程序中以供将来使用</p>
-<p>在项目中主要使用了其中的文字粘贴功能。参见代码：</p>
-</li>
-</ul>
-<blockquote>
-<ul>
-<li>Interface to the clipboard service, for placing and retrieving text in the global clipboard.<br>每次只能有一个数据在剪贴板上。</li>
-</ul>
-</blockquote>
-<h2 id="项目中的代码"><a href="#项目中的代码" class="headerlink" title="项目中的代码"></a>项目中的代码</h2><pre><code>//获取  ClipboardManager
-ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+<p>在项目 Giraffe 中使用 BroadcastReceiver 实现事件提醒 。</p>
+<h1 id="BroadcastReceiver"><a href="#BroadcastReceiver" class="headerlink" title="BroadcastReceiver"></a>BroadcastReceiver</h1><h2 id="标准广播"><a href="#标准广播" class="headerlink" title="标准广播"></a>标准广播</h2><p>是异步广播，广播一经发出去，所有广播接收器会同时收到该条广播，不分先后顺序。标准广播没法拦截，效率高。</p>
+<p>发送广播：</p>
+<pre><code>Intent intent = new Intent(&quot;com.example.broadcasttest.MySelfReceiver&quot;）
+sendBroadcast(intent)
+</code></pre><h2 id="有序广播"><a href="#有序广播" class="headerlink" title="有序广播"></a>有序广播</h2><p>是同步广播，按照广播接收器的接受处理顺序进行传递，只有优先级广播接收器处理完该条广播，才会传递下一个接收器。广播可被拦截。</p>
+<p>发送广播：</p>
+<pre><code>Intent intent = new Intent(&quot;com.example.broadcasttest.MySelfReceiver&quot;）
 
-// 构造出监听事件
- OnPrimaryClipChangedListener onClipChangedListener = new OnPrimaryClipChangedListener() {
-    @Override
-    public void onPrimaryClipChanged() {
-        // do something
+sendOrderedBroadcast(intent,null);
+</code></pre><p>有序广播可以拦截广播<br>在BroadcastReceiver 中 的 onReceive() 方法中在任务处理结束后添加</p>
+<pre><code>abortBroadcast();
+</code></pre><p>后面没有接受到的广播就不会收到了。<br>在注册广播时可以添加广播的优先级</p>
+<h2 id="本地广播"><a href="#本地广播" class="headerlink" title="本地广播"></a>本地广播</h2><p>本地广播的好处就是，只有本应用可以获得该条广播。是安全的。</p>
+<pre><code>localBroadcastManager = LocalBroadcastManager.getInstance(this);
+
+// 注册广播
+localBroadcastManager.registerReceiver(localReceiver, intentFilter);
+
+// 注销广播
+localBroadcastManager.unregisterReceiver(localReceiver);
+</code></pre><h2 id="广播的注册"><a href="#广播的注册" class="headerlink" title="广播的注册"></a>广播的注册</h2><h3 id="动态注册"><a href="#动态注册" class="headerlink" title="动态注册"></a>动态注册</h3><p>在代码中注册</p>
+<pre><code>// 在使用的时候注册广播
+AlarmReceiver receiver = new AlarmReceiver();
+    IntentFilter filter = new IntentFilter();
+    filter.addAction(&quot;com.aya.giraffe.module.AlarmReceiver&quot;);
+    registerReceiver(receiver,filter);
+</code></pre><p>在接收器中判断 action 是否匹配，action 可以有多条，只要符合一条就可以。详细请看 IntentFilter 的使用。</p>
+<pre><code>//在 onDestroy() 中要注销该广播
+unregisterReceiver(receiver);
+</code></pre><p>它的生命周期为</p>
+<h3 id="静态注册"><a href="#静态注册" class="headerlink" title="静态注册"></a>静态注册</h3><p>在 manifest 中注册<br>，即使应用未启动也能收到广播，只要系统启动就会启动。</p>
+<pre><code>&lt;receiver android:name=&quot;.module.content.AlarmReceiver&quot;&gt;
+
+&lt;/receiver&gt;
+</code></pre><h2 id="IntentFilter"><a href="#IntentFilter" class="headerlink" title="IntentFilter"></a>IntentFilter</h2><p>action 必须有，可以添加多条  ， 只要符合一条即可<br>category 非必需，可以添加多条，但是需要全部符合才可以,有默认值<br>data  非必需，同 action 一样</p>
+<h1 id="实现的内容"><a href="#实现的内容" class="headerlink" title="实现的内容"></a>实现的内容</h1><h2 id="提醒事件"><a href="#提醒事件" class="headerlink" title="提醒事件"></a>提醒事件</h2><p>根据设定的提醒事件时间来准时的提醒用户，该时间点有事件提醒。<br>事件提醒设计的字段有 可查看项目 <a href="https://github.com/JunaYa/Giraffe/blob/master/app/src/main/java/com/aya/giraffe/realmData/RGNote.java" target="_blank" rel="external">Giraffe</a> 的 RGNote 设计</p>
+<pre><code>public String type;
+public RealmList&lt;RTag&gt; tags;
+public String title;
+public String content;
+public Date create_time;
+public Date alarm_time;
+public Date end_time;
+</code></pre><p>根据事件创建时间 create_time 来排序展示， 根据事件提醒事件来 alarm_time 定时提醒用户， 根据 end_time 来设定该事件用户有没有处理，并根据该字段判断是否需要再次为用户提醒该事件。</p>
+<h2 id="逻辑"><a href="#逻辑" class="headerlink" title="逻辑"></a>逻辑</h2><h3 id="KeepLifeAlarmReceiver"><a href="#KeepLifeAlarmReceiver" class="headerlink" title="KeepLifeAlarmReceiver"></a>KeepLifeAlarmReceiver</h3><p>首先注册一个静态广播 KeepLifeAlarmReceiver ，用来监听用户手机屏幕解锁， 得到广播通知去启动后台任务，</p>
+<p>在manifest中</p>
+<pre><code>&lt;receiver android:name=&quot;.module.alarm.KeepLifeAlarmReceiver&quot;&gt;
+       &lt;intent-filter&gt;
+           &lt;action android:name=&quot;android.intent.action.USER_PRESENT&quot;/&gt;
+       &lt;/intent-filter&gt;
+   &lt;/receiver&gt;
+</code></pre><p>android.intent.action.USER_PRESENT 是系统广播，手机屏幕解锁会得到广播通知</p>
+<pre><code>//KeepLifeAlarmReceiver
+// 通知后台服务是否有事件提醒
+
+ @Override
+public void onReceive(Context context, Intent intent) {
+    if (intent!= null &amp;&amp; intent.getAction().equals(intent.ACTION_USER_PRESENT)){
+        context.startService(AlarmNoteService.newInstance(context));
     }
-};
+}
+</code></pre><h3 id="AlarmNoteService"><a href="#AlarmNoteService" class="headerlink" title="AlarmNoteService"></a>AlarmNoteService</h3><p>在manifest中<br>     <service android:name=".module.alarm.AlarmNoteService"></service></p>
+<p>AlarmNoteService 查询有没有提示的事件， 如果有事件提醒就通知， 如果有今天的事件提醒 使用 AlarmManager 实现，定时发送一个广播去通知用户有事件提醒， AlarmReceiver 用来弹出通知事件。</p>
+<pre><code>// 查询是否有事件提醒
+private void onHandleIntent(){
+  // 如果事件提醒事件已经过期，马上提醒
+  onAlarmNote(rgNote)；
+  // 如果今天有事件需要提醒，则定时通知
+  onRegisterReceiver()；
+}
 
-// 给 clipboard 添加监听事件，
- clipboard.addPrimaryClipChangedListener(onClipChangedListener);
 
-// 注销监听事件
-clipboard.removePrimaryClipChangedListener(onClipChangedListener);
+// 通知
+private void onAlarmNote(final RGNote rgNote){
+    //  notify
+}
 
-// 判断是否有内容
-clipboard.hasPrimaryClip()
-// 内容是否为文本（项目中只用到该类型）
-clipboard.getPrimaryClipDescription().hasMimeType(MIMETYPE_TEXT_PLAIN)
+／/ 注册广播
+private void onRegisterReceiver(){
+    // alarm register receiver
+    // AlarmReceiver
+}
+</code></pre><h2 id="AlarmReceiver"><a href="#AlarmReceiver" class="headerlink" title="AlarmReceiver"></a>AlarmReceiver</h2><p> 得到广播通知</p>
+<p>在 manifest 中注册</p>
+<pre><code>&lt;receiver android:name=&quot;.module.alarm.AlarmReceiver&quot;&gt;
+        &lt;intent-filter&gt;
+            &lt;action android:name=&quot;com.aya.giraffe.module.AlarmReceiver&quot;/&gt;
+        &lt;/intent-filter&gt;
+    &lt;/receiver&gt;
+</code></pre><p>onReceiver  处理，通知</p>
+<pre><code> @Override
+public void onReceive(Context context, Intent intent) {
+    String id = intent.getStringExtra(Constant.ARG_ALARM_ID);
+    String title = intent.getStringExtra(Constant.ARG_ALARM_TITLE);
+    String content = intent.getStringExtra(Constant.ARG_ALARM_CONTENT);
+    NotifyUtils.showNotify(context,id, title, content);
+}
+</code></pre><p>详细请查看项目源码<br><a href="https://github.com/JunaYa/Giraffe/blob/master/app/src/main/java/com/aya/giraffe/module/main/MainActivity.java" target="_blank" rel="external">项目地址 https://github.com/JunaYa/Giraffe </a></p>
 
-// 复制文本， 该 count 返回的一直是 1
-int count = clipboard.getPrimaryClip().getItemCount();
-
-// 获取到剪贴板内容
-ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
-
-// 获取内容里的真正文本
-String pasteData =  item.getText().toString();
-
-// 自己的需求处理
-mSheetPaste.registerData(pasteData,mPagerAdapter.getConfig());
-mSheetPaste.show();
-</code></pre>
       
     </div>
 
@@ -444,7 +498,11 @@ mSheetPaste.show();
           
             <a href="/tags/Giraffe/" rel="tag">#Giraffe</a>
           
-            <a href="/tags/ClipboardManager/" rel="tag">#ClipboardManager</a>
+            <a href="/tags/AlarmManager/" rel="tag">#AlarmManager</a>
+          
+            <a href="/tags/BroadcastReceiver/" rel="tag">#BroadcastReceiver</a>
+          
+            <a href="/tags/Service/" rel="tag">#Service</a>
           
         </div>
       
@@ -453,16 +511,16 @@ mSheetPaste.show();
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/08/Android-ViewStub-的重复使用/" rel="next" title="Android ViewStub 的重复使用">
-                <i class="fa fa-chevron-left"></i> Android ViewStub 的重复使用
+              <a href="/2016/11/17/项目-Giraffe-记事本之-BottomSheetDialog-使用/" rel="next" title="项目 Giraffe 记事本之 BottomSheetDialog 使用">
+                <i class="fa fa-chevron-left"></i> 项目 Giraffe 记事本之 BottomSheetDialog 使用
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/11/17/项目-Giraffe-记事本之-BottomSheetDialog-使用/" rel="prev" title="项目 Giraffe 记事本之 BottomSheetDialog 使用">
-                项目 Giraffe 记事本之 BottomSheetDialog 使用 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/11/20/OOM之Giraffe-记事本中使用ClipboardManager不当/" rel="prev" title="OOM之Giraffe 记事本中使用ClipboardManager不当">
+                OOM之Giraffe 记事本中使用ClipboardManager不当 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -645,7 +703,7 @@ mSheetPaste.show();
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用剪贴版快捷创建-note"><span class="nav-number">1.</span> <span class="nav-text">使用剪贴版快捷创建 note</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主要知识点"><span class="nav-number">1.1.</span> <span class="nav-text">主要知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目中的代码"><span class="nav-number">1.2.</span> <span class="nav-text">项目中的代码</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#BroadcastReceiver"><span class="nav-number">1.</span> <span class="nav-text">BroadcastReceiver</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#标准广播"><span class="nav-number">1.1.</span> <span class="nav-text">标准广播</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有序广播"><span class="nav-number">1.2.</span> <span class="nav-text">有序广播</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地广播"><span class="nav-number">1.3.</span> <span class="nav-text">本地广播</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#广播的注册"><span class="nav-number">1.4.</span> <span class="nav-text">广播的注册</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#动态注册"><span class="nav-number">1.4.1.</span> <span class="nav-text">动态注册</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态注册"><span class="nav-number">1.4.2.</span> <span class="nav-text">静态注册</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IntentFilter"><span class="nav-number">1.5.</span> <span class="nav-text">IntentFilter</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现的内容"><span class="nav-number">2.</span> <span class="nav-text">实现的内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#提醒事件"><span class="nav-number">2.1.</span> <span class="nav-text">提醒事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑"><span class="nav-number">2.2.</span> <span class="nav-text">逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#KeepLifeAlarmReceiver"><span class="nav-number">2.2.1.</span> <span class="nav-text">KeepLifeAlarmReceiver</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AlarmNoteService"><span class="nav-number">2.2.2.</span> <span class="nav-text">AlarmNoteService</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AlarmReceiver"><span class="nav-number">2.3.</span> <span class="nav-text">AlarmReceiver</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
@@ -765,9 +823,9 @@ mSheetPaste.show();
 
     <script type="text/javascript">
       var disqus_shortname = 'junaya';
-      var disqus_identifier = '2016/11/17/项目-Giraffe-记事本之剪贴板应用/';
-      var disqus_title = "项目 Giraffe 记事本之剪贴板应用";
-      var disqus_url = 'http://junaya.cn/2016/11/17/项目-Giraffe-记事本之剪贴板应用/';
+      var disqus_identifier = '2016/11/18/项目-Giraffe-记事本之AlarmManager-BroadcastReceiver-Service-实现事件提醒/';
+      var disqus_title = "项目 Giraffe 记事本之AlarmManager+BroadcastReceiver+Service 实现事件提醒";
+      var disqus_url = 'http://junaya.cn/2016/11/18/项目-Giraffe-记事本之AlarmManager-BroadcastReceiver-Service-实现事件提醒/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
