@@ -95,7 +95,7 @@
 <meta name="description" content="格物致知">
 <meta property="og:type" content="website">
 <meta property="og:title" content="JunaYa 个人博客">
-<meta property="og:url" content="http://junaya.cn/tags/Java/index.html">
+<meta property="og:url" content="http://junaya.cn/tags/java/index.html">
 <meta property="og:site_name" content="JunaYa 个人博客">
 <meta property="og:description" content="格物致知">
 <meta name="twitter:card" content="summary">
@@ -121,10 +121,10 @@
 
 
 
-  <link rel="canonical" href="http://junaya.cn/tags/Java/"/>
+  <link rel="canonical" href="http://junaya.cn/tags/java/"/>
 
 
-  <title> 标签: Java | JunaYa 个人博客 </title>
+  <title> 标签: java | JunaYa 个人博客 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -288,7 +288,7 @@
   <div id="posts" class="posts-collapse">
     <div class="collection-title">
       <h2 >
-        Java
+        java
         <small>标签</small>
       </h2>
     </div>
@@ -301,9 +301,9 @@
 
       <h1 class="post-title">
         
-            <a class="post-title-link" href="/2016/11/07/MySQL-for-mac-的初识/" itemprop="url">
+            <a class="post-title-link" href="/2016/11/07/Java-后台开发之-小蓝图/" itemprop="url">
               
-                <span itemprop="name">Java 后台开发之-（MySQL for mac 的初识）</span>
+                <span itemprop="name">Java 后台开发之---小蓝图</span>
               
             </a>
         
@@ -311,7 +311,7 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-07T23:41:04+08:00"
+              datetime="2016-11-07T23:49:45+08:00"
               content="2016-11-07" >
           11-07
         </time>
@@ -329,37 +329,9 @@
 
       <h1 class="post-title">
         
-            <a class="post-title-link" href="/2016/11/06/排序算法/" itemprop="url">
+            <a class="post-title-link" href="/2016/10/31/数据结构/" itemprop="url">
               
-                <span itemprop="name">排序算法</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-06T16:00:17+08:00"
-              content="2016-11-06" >
-          11-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/11/05/Java-基础/" itemprop="url">
-              
-                <span itemprop="name">Java 基础</span>
+                <span itemprop="name">数据结构</span>
               
             </a>
         
@@ -367,9 +339,9 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-05T09:13:31+08:00"
-              content="2016-11-05" >
-          11-05
+              datetime="2016-10-31T23:46:50+08:00"
+              content="2016-10-31" >
+          10-31
         </time>
       </div>
 
@@ -419,7 +391,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">11</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -608,7 +580,7 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'junaya';
-      var disqus_identifier = 'tags/Java/index.html';
+      var disqus_identifier = 'tags/java/index.html';
       var disqus_title = "";
       var disqus_url = '';
 
@@ -730,6 +702,45 @@
                 if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
                 if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
                 $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
+      $resultContent.innerHTML = str;
             });
             proceedsearch();
         }
