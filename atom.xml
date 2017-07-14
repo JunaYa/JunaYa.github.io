@@ -1,0 +1,1591 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>JunaYa 个人博客</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://junaya.cn/"/>
+  <updated>2017-07-14T16:45:51.000Z</updated>
+  <id>http://junaya.cn/</id>
+  
+  <author>
+    <name>JunaYa</name>
+    <email>ayac3j@gmail.com</email>
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Git 修炼手册之批量修改 author email“ </title>
+    <link href="http://junaya.cn/2017/07/15/Git-%E4%BF%AE%E7%82%BC%E6%89%8B%E5%86%8C%E4%B9%8B%E6%89%B9%E9%87%8F%E4%BF%AE%E6%94%B9-author-email%E2%80%9C/"/>
+    <id>http://junaya.cn/2017/07/15/Git-修炼手册之批量修改-author-email“/</id>
+    <published>2017-07-14T16:45:51.000Z</published>
+    <updated>2017-07-14T16:45:51.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>写于2017年初的我</title>
+    <link href="http://junaya.cn/2017/01/21/%E5%86%99%E4%BA%8E2017%E5%B9%B4%E5%88%9D%E7%9A%84%E6%88%91/"/>
+    <id>http://junaya.cn/2017/01/21/写于2017年初的我/</id>
+    <published>2017-01-21T09:35:49.000Z</published>
+    <updated>2017-01-21T09:35:50.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Palette 获取图片中的颜色</title>
+    <link href="http://junaya.cn/2017/01/13/Palette-%E8%8E%B7%E5%8F%96%E5%9B%BE%E7%89%87%E4%B8%AD%E7%9A%84%E9%A2%9C%E8%89%B2/"/>
+    <id>http://junaya.cn/2017/01/13/Palette-获取图片中的颜色/</id>
+    <published>2017-01-13T07:28:59.000Z</published>
+    <updated>2017-01-13T07:30:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://developer.android.com/reference/android/support/v7/graphics/Palette.html?hl=zh-cn" target="_blank" rel="external">Palette</a> 官网介绍</p>
+<p><a href="https://github.com/florent37/GlidePalette" target="_blank" rel="external">GlidePalette</a> 使用简单方便</p>
+<h1 id="使用-Palette-获取图片中的颜色"><a href="#使用-Palette-获取图片中的颜色" class="headerlink" title="使用 Palette 获取图片中的颜色"></a>使用 Palette 获取图片中的颜色</h1><h2 id="获取颜色种类"><a href="#获取颜色种类" class="headerlink" title="获取颜色种类"></a>获取颜色种类</h2><ul>
+<li>Vibrant</li>
+<li>Vibrant Dark</li>
+<li>Vibrant Light</li>
+<li>Muted</li>
+<li>Muted Dark</li>
+<li>Muted Light</li>
+</ul>
+<p>总共有 6 种颜色获取到，可以看   <a href="https://github.com/florent37/GlidePalette" target="_blank" rel="external">GlidePalette</a> 中的 REANDME ，很直观。</p>
+<h2 id="获取颜色方法"><a href="#获取颜色方法" class="headerlink" title="获取颜色方法"></a>获取颜色方法</h2><pre><code>// Synchronous
+ Palette p = Palette.from(bitmap).generate();
+
+ // Asynchronous
+ Palette.from(bitmap).generate(new PaletteAsyncListener() {
+     public void onGenerated(Palette p) {
+         // Use generated instance
+     }
+ });
+</code></pre><h3 id="遇到的坑"><a href="#遇到的坑" class="headerlink" title="遇到的坑"></a>遇到的坑</h3><p>通过使用 Asynchronous 获取图片颜色， 有时会得不到颜色</p>
+<p>Swatch lightVibrantSwatch = palette.getLightVibrantSwatch();<br>            Swatch vibrantSwatch = palette.getVibrantSwatch();</p>
+<h2 id="使用获取到的颜色作为渐变色差背景"><a href="#使用获取到的颜色作为渐变色差背景" class="headerlink" title="使用获取到的颜色作为渐变色差背景"></a>使用获取到的颜色作为渐变色差背景</h2><pre><code>Swatch lightVibrantSwatch = palette.getLightVibrantSwatch();
+        Swatch vibrantSwatch = palette.getVibrantSwatch();
+        int topColor = DEFAULT_TOP_COLOR;
+        int bottomColor = DEFAULT_BOTTOM_COLOR;
+        if (lightVibrantSwatch != null) {
+            topColor = ColorUtils.setAlphaComponent(lightVibrantSwatch.getRgb(), 50);
+        }
+        if (vibrantSwatch != null) {
+            bottomColor = ColorUtils.setAlphaComponent(vibrantSwatch.getRgb(), 50);
+        }
+        GradientDrawable gradientDrawable = new GradientDrawable(TOP_BOTTOM, new int[]{topColor, bottomColor});
+</code></pre><p>其中</p>
+<pre><code>ColorUtils.setAlphaComponent(vibrantSwatch.getRgb(), 50);
+</code></pre><p>是将获取到的颜色设置 alpha 的值，如果直接使用获取到的颜色，颜色看起来会很冲突，给其设置 alpha 的值， 使得所有颜色都会有缓和过度。可以自己调节着试一试。</p>
+<p>需要给背景设置一个默认的颜色渐变色。</p>
+<p>bg_gradient_drawable 设置给背景</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;layer-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+    &lt;item&gt;
+        &lt;shape android:shape=&quot;rectangle&quot;&gt;
+            &lt;gradient android:angle=&quot;90&quot;
+                      android:endColor=&quot;#5052C4B2&quot;
+                      android:startColor=&quot;#50FF4081&quot;
+            /&gt;
+        &lt;/shape&gt;
+    &lt;/item&gt;
+&lt;/layer-list&gt;
+</code></pre><p>当 palette 获取到图片的颜色后，再将选择的颜色 设置给 GradientDrawable 。</p>
+<h2 id="封装后的-SimpleTarget"><a href="#封装后的-SimpleTarget" class="headerlink" title="封装后的 SimpleTarget"></a>封装后的 SimpleTarget</h2><p>GlidePaletteDrawable 继承 Glide 中的 SimpleTarget</p>
+<pre><code>public abstract class GlidePaletteDrawable extends SimpleTarget&lt;GlideDrawable&gt; {
+
+private static final int DEFAULT_TOP_COLOR = 0x005052C4B2;
+private static final int DEFAULT_BOTTOM_COLOR = 0x0050FF4081;
+
+@Override
+public void onResourceReady(GlideDrawable resource, GlideAnimation&lt;? super GlideDrawable&gt; glideAnimation) {
+
+    onGlideDrawableReady(resource);
+
+    Bitmap bitmap = ((GlideBitmapDrawable) resource).getBitmap();
+    if (bitmap != null) {
+        paletteBitmap(bitmap);
+    } else {
+        setGradientDrawable(DEFAULT_TOP_COLOR, DEFAULT_BOTTOM_COLOR);
+    }
+
+}
+
+private void setGradientDrawable(int topColor, int bottomColor) {
+    GradientDrawable gradientDrawable = new GradientDrawable(TOP_BOTTOM, new int[]{topColor, bottomColor});
+    onGradientDrawableReady(gradientDrawable);
+}
+
+private void paletteBitmap(Bitmap bitmap) {
+    Palette.from(bitmap).generate(palette -&gt; {
+        Swatch lightVibrantSwatch = palette.getLightVibrantSwatch();
+        Swatch darkVibrantSwatch = palette.getDarkVibrantSwatch();
+        int topColor = DEFAULT_TOP_COLOR;
+        int bottomColor = DEFAULT_BOTTOM_COLOR;
+        if (lightVibrantSwatch != null) {
+            topColor = ColorUtils.setAlphaComponent(lightVibrantSwatch.getRgb(), 50);
+        }
+        if (darkVibrantSwatch != null) {
+            bottomColor = ColorUtils.setAlphaComponent(darkVibrantSwatch.getRgb(), 50);
+        }
+        setGradientDrawable(topColor, bottomColor);
+    });
+}
+
+public abstract void onGradientDrawableReady(GradientDrawable gradientDrawable);
+
+public abstract void onGlideDrawableReady(GlideDrawable drawable);
+</code></pre><p>}</p>
+<p>然后在 activity 中是这样使用的</p>
+<pre><code>Glide.with(this)
+            .load(imgUrl)
+            .into(new GlidePaletteDrawable() {
+                @Override
+                public void onGlideDrawableReady(GlideDrawable drawable) {
+                   //  给 ImageView 设置图片资源
+                }
+
+                @Override
+                public void onGradientDrawableReady(GradientDrawable gradientDrawable) {
+
+                   // 设置渐变背景
+                   mBinding.rootView.setBackground(gradientDrawable);
+                }
+            });
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://developer.android.com/reference/android/support/v7/graphics/Palette.html?hl=zh-cn&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Palett
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://junaya.cn/tags/Android/"/>
+    
+      <category term="Palette" scheme="http://junaya.cn/tags/Palette/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android 7.0 install .apk</title>
+    <link href="http://junaya.cn/2016/12/28/Android-7-0-install-apk/"/>
+    <id>http://junaya.cn/2016/12/28/Android-7-0-install-apk/</id>
+    <published>2016-12-28T07:34:47.000Z</published>
+    <updated>2017-01-13T07:29:49.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>在模拟器上运行程序，下载安装包，执行安装，会出现问题。首先在<br>6.0 模拟器上</p>
+<pre><code>for security ...
+</code></pre><p>在7.0 模拟器上</p>
+<p>  for security …</p>
+<p>在设置中 打开 source unknown</p>
+<p>执行安装程序， 回出现一下问题</p>
+<pre><code>Fatal Exception: android.os.FileUriExposedException: file:///storage/emulated/0/Download/com.hongen.kidsmusic-1.0.1.apk exposed beyond app through Intent.getData()
+   at android.os.StrictMode.onFileUriExposed(StrictMode.java:1799)
+   at android.net.Uri.checkFileUriExposed(Uri.java:2346)
+   at android.content.Intent.prepareToLeaveProcess(Intent.java:8933)
+   at android.content.Intent.prepareToLeaveProcess(Intent.java:8894)
+   at android.app.Instrumentation.execStartActivity(Instrumentation.java:1517)
+   at android.app.ContextImpl.startActivity(ContextImpl.java:819)
+   at android.app.ContextImpl.startActivity(ContextImpl.java:796)
+   at android.content.ContextWrapper.startActivity(ContextWrapper.java:356)
+   at com.hongen.kidsmusic.uitls.PackageUtils.installApk(PackageUtils.java:63)
+   at com.hongen.kidsmusic.ui.update.UpdateService.onHandleIntent(UpdateService.java:32)
+   at android.app.IntentService$ServiceHandler.handleMessage(IntentService.java:67)
+   at android.os.Handler.dispatchMessage(Handler.java:102)
+   at android.os.Looper.loop(Looper.java:154)
+   at android.os.HandlerThread.run(HandlerThread.java:61)
+</code></pre><p> 释<a href="https://developer.android.com/reference/android/os/FileUriExposedException.html" target="_blank" rel="external">官网的解释</a></p>
+<p>7.0 私密文件使用 <a href="https://developer.android.com/reference/android/support/v4/content/FileProvider.html" target="_blank" rel="external">FileProvider</a></p>
+<pre><code>当运行安装 apk 的时候会出现 package installer has stoped
+或者会出现 package installer keeps stopping   
+这样的错误又不会在 as 中捕获日志
+</code></pre><h3 id="下载位置"><a href="#下载位置" class="headerlink" title="下载位置"></a>下载位置</h3><pre><code>String directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
+</code></pre><h3 id="安装代码"><a href="#安装代码" class="headerlink" title="安装代码"></a>安装代码</h3><p>6.0 之前</p>
+<pre><code>Intent intent = new Intent(Intent.ACTION_VIEW);
+intent.setDataAndType(Uri.fromFile(apkFile), &quot;application/vnd.android.package-archive&quot;);
+intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+context.startActivity(intent);
+</code></pre><p>6.0 之后</p>
+<p><a href="http://stackoverflow.com/questions/4967669/android-install-apk-programmatically" target="_blank" rel="external">StackOverFlow 上的回答</a></p>
+<h3 id="可通过的代码（全）"><a href="#可通过的代码（全）" class="headerlink" title="可通过的代码（全）"></a>可通过的代码（全）</h3><p>1 manifest 中添加代码</p>
+<pre><code>&lt;provider
+        android:name=&quot;android.support.v4.content.FileProvider&quot;
+        android:authorities=&quot;${applicationId}.provider&quot;
+        android:exported=&quot;false&quot;
+        android:grantUriPermissions=&quot;true&quot;&gt;
+        &lt;meta-data
+            android:name=&quot;android.support.FILE_PROVIDER_PATHS&quot;
+            android:resource=&quot;@xml/provider_paths&quot;/&gt;
+    &lt;/provider&gt;
+</code></pre><p>2 res/xml/provider_paths.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+  &lt;paths&gt;
+      &lt;external-path
+          name=&quot;publicDir&quot; path=&quot;/&quot;/&gt;
+  &lt;/paths&gt;
+</code></pre><p>3 install</p>
+<pre><code>public static void installApk(Context context, File apkFile) {
+
+    Intent intent = new Intent(Intent.ACTION_VIEW);
+    Uri uri = null;
+    if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.N) {
+        uri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + &quot;.provider&quot;, apkFile);
+        intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+        intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+    } else {
+        uri = Uri.fromFile(apkFile);
+    }
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    intent.setDataAndType(uri, &quot;application/vnd.android.package-archive&quot;);
+    context.startActivity(intent);
+}
+</code></pre><p>因为安装 apk 需要先获取到临时读取和写文件的权限。 之前就是少了这两步，所以一直卡在这里。终于可以了</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h2&gt;&lt;p&gt;在模拟器上运行程序，下载安装包，执行安装，会出现问题。首先在&lt;br&gt;6.0 模拟器上&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;for security
+    
+    </summary>
+    
+    
+      <category term="Android 7.0" scheme="http://junaya.cn/tags/Android-7-0/"/>
+    
+      <category term="install .apk" scheme="http://junaya.cn/tags/install-apk/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>常来的地方</title>
+    <link href="http://junaya.cn/2016/12/07/%E5%B8%B8%E6%9D%A5%E7%9A%84%E5%9C%B0%E6%96%B9/"/>
+    <id>http://junaya.cn/2016/12/07/常来的地方/</id>
+    <published>2016-12-07T08:45:40.000Z</published>
+    <updated>2016-12-07T09:41:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><p><a href="https://www.julyedu.com/" target="_blank" rel="external">七月算法</a></p>
+<h1 id="blog"><a href="#blog" class="headerlink" title="blog"></a>blog</h1><p><a href="https://drakeet.me/" target="_blank" rel="external">drakeet</a></p>
+<p><a href="http://blog.zhaiyifan.cn/" target="_blank" rel="external">大帅</a></p>
+<p><a href="http://blog.csdn.net/guolin_blog" target="_blank" rel="external">郭霖</a>   </p>
+<p><a href="http://blog.csdn.net/lmj623565791" target="_blank" rel="external">鸿洋_</a></p>
+<p><a href="http://www.liaoxuefeng.com/" target="_blank" rel="external">廖雪峰</a></p>
+<p><a href="http://blog.daimajia.com/" target="_blank" rel="external">daimajia</a></p>
+<h1 id="site"><a href="#site" class="headerlink" title="site"></a>site</h1><p><a href="http://gank.io/" target="_blank" rel="external">gank.io</a></p>
+<p><a href="https://realm.io/news/" target="_blank" rel="external">realm</a></p>
+<p><a href="https://futurestud.io/" target="_blank" rel="external">futurestud.io</a></p>
+<p><a href="https://cn.udacity.com/" target="_blank" rel="external">udacity</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;算法&quot;&gt;&lt;a href=&quot;#算法&quot; class=&quot;headerlink&quot; title=&quot;算法&quot;&gt;&lt;/a&gt;算法&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://www.julyedu.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;七月算法
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>客户端和后台协商使用一直的 MD5 提高安全</title>
+    <link href="http://junaya.cn/2016/11/29/%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%92%8C%E5%90%8E%E5%8F%B0%E5%8D%8F%E5%95%86%E4%BD%BF%E7%94%A8-MD5-%E6%8F%90%E9%AB%98%E6%8E%A5%E5%8F%A3%E5%AE%89%E5%85%A8/"/>
+    <id>http://junaya.cn/2016/11/29/客户端和后台协商使用-MD5-提高接口安全/</id>
+    <published>2016-11-29T11:51:48.000Z</published>
+    <updated>2016-11-29T12:45:40.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在接口中使用，客户端和后台同时设计如下，来实现安全接口</p>
+<pre><code>// 随意的一个，和后台一致
+
+private static final String APISecretKey = &quot;fdsfsdgfds2343234&quot; ;
+</code></pre><p>在具体的接口中使用</p>
+<pre><code>public String getSign(HashMap&lt;String, String&gt; params) {
+   Set&lt;String&gt; keySet = params.keySet();
+   String[] keys = keySet.toArray(new String[keySet.size()]);
+   // 按照首字母正序排序(和后台一致)
+   Arrays.sort(keys, String.CASE_INSENSITIVE_ORDER);
+
+   String keyStr = &quot;&quot;;
+   for (String key : keys) {
+       keyStr += (key + &quot;=&quot; + params.get(key)) + &quot;&amp;&quot;;
+   }
+   String sign = Md5.md5(keyStr + APISecretKey);
+   return sign;
+</code></pre><p>   }</p>
+<hr>
+<p>作为 Utils 使用</p>
+<p>   public class Md5 {<br>       private static final char[] HEX_DIGITS = new char[]{‘0’, ‘1’, ‘2’, ‘3’, ‘4’, ‘5’, ‘6’, ‘7’, ‘8’, ‘9’, ‘a’, ‘b’, ‘c’, ‘d’, ‘e’, ‘f’};<br>   public Md5() {<br>   }</p>
+<p>   public static String toHexString(byte[] b) {<br>       StringBuilder sb = new StringBuilder(b.length * 2);</p>
+<pre><code>for(int i = 0; i &lt; b.length; ++i) {
+    sb.append(HEX_DIGITS[(b[i] &amp; 240) &gt;&gt;&gt; 4]);
+    sb.append(HEX_DIGITS[b[i] &amp; 15]);
+}
+
+return sb.toString();
+</code></pre><p>   }</p>
+<p>   public static String md5(String s) {<br>       try {<br>           MessageDigest e = MessageDigest.getInstance(“MD5”);<br>           e.update(s.getBytes());<br>           byte[] messageDigest = e.digest();<br>           return toHexString(messageDigest);<br>       } catch (NoSuchAlgorithmException var3) {<br>           var3.printStackTrace();<br>           return “”;<br>       }<br>   }<br>}</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在接口中使用，客户端和后台同时设计如下，来实现安全接口&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 随意的一个，和后台一致
+
+private static final String APISecretKey = &amp;quot;fdsfsdgfds2343234&amp;quot; ;
+&lt;/c
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://junaya.cn/tags/Android/"/>
+    
+      <category term="MD5" scheme="http://junaya.cn/tags/MD5/"/>
+    
+      <category term="接口" scheme="http://junaya.cn/tags/%E6%8E%A5%E5%8F%A3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>项目 Giraffe 记事本之使用 vector 生成图标的兼容问题</title>
+    <link href="http://junaya.cn/2016/11/26/%E9%A1%B9%E7%9B%AE-Giraffe-%E8%AE%B0%E4%BA%8B%E6%9C%AC%E4%B9%8B%E4%BD%BF%E7%94%A8-vector-%E7%94%9F%E6%88%90%E5%9B%BE%E6%A0%87%E7%9A%84%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/"/>
+    <id>http://junaya.cn/2016/11/26/项目-Giraffe-记事本之使用-vector-生成图标的兼容问题/</id>
+    <published>2016-11-25T17:27:39.000Z</published>
+    <updated>2016-11-25T17:30:45.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="使用-Android-Studio-内置的-vector-生成图标的兼容问题"><a href="#使用-Android-Studio-内置的-vector-生成图标的兼容问题" class="headerlink" title="使用 Android Studio 内置的 vector 生成图标的兼容问题"></a>使用 Android Studio 内置的 vector 生成图标的兼容问题</h1><p> <a href="http://blog.csdn.net/u010335298/article/details/51840805" target="_blank" rel="external">详细查看该原作者的博客</a></p>
+<h2 id="Giraffe-项目中的使用"><a href="#Giraffe-项目中的使用" class="headerlink" title="Giraffe 项目中的使用"></a>Giraffe 项目中的使用</h2><p>首先说一下不兼容的问题，如果直接使用 vector ，图标也会展现出来，但是无论你在 vector 中设置的颜色是什么，都会显示为黑色的。</p>
+<pre><code>&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:width=&quot;24dp&quot;
+    android:height=&quot;24dp&quot;
+    android:viewportWidth=&quot;24.0&quot;
+    android:viewportHeight=&quot;24.0&quot;&gt;
+&lt;path
+    android:fillColor=&quot;@color/white&quot;
+    android:pathData=&quot;M19,13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z&quot;/&gt;
+</code></pre><p></p>
+<p>例如上面代码中给 path 设置 android:fillColor=”@color/white” ，即使你设置为白色，但在 5.0 一下依然显示为黑色。<br>使用兼容就可以实现颜色的设置</p>
+<p>使用Gradle Plugin 2.0以上</p>
+<pre><code>defaultConfig {
+    vectorDrawables.useSupportLibrary = true
+}
+</code></pre><p>然后在 BaseActivity 中统一添加</p>
+<pre><code>static {
+    AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+}
+</code></pre><p>如果 ImageView 使用 src 来使用该文件，</p>
+<pre><code>&lt;ImageView
+    android:id=&quot;@+id/iv&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    app:srcCompat=&quot;@drawable/vector_image&quot;/&gt;
+</code></pre><p>如果设置背景 例如给 ImageButton</p>
+<pre><code>&lt;ImageButton
+    android:id=&quot;@+id/tags&quot;
+    android:layout_width=&quot;28dp&quot;
+    android:layout_height=&quot;28dp&quot;
+    android:layout_alignParentRight=&quot;true&quot;
+    android:layout_centerVertical=&quot;true&quot;
+    android:padding=&quot;8dp&quot;
+    android:gravity=&quot;center&quot;
+    android:button=&quot;@null&quot;
+    android:background=&quot;@drawable/ic_add&quot;
+    android:onClick=&quot;@{viewModel.onAddType}&quot;
+    android:text=&quot;@string/tags&quot;/&gt;
+</code></pre><p>其中 android:background=”@drawable/ic_add” 是</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+    &lt;item android:drawable=&quot;@drawable/ic_add_normal&quot; android:state_pressed=&quot;false&quot;/&gt;
+    &lt;item android:drawable=&quot;@drawable/ic_add_pressed&quot; android:state_pressed=&quot;true&quot;/&gt;
+&lt;/selector&gt;
+</code></pre><p>而其中 ic_add_normal 和 ic_add_pressed 的事件颜色不同</p>
+<pre><code>&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:width=&quot;24dp&quot;
+    android:height=&quot;24dp&quot;
+    android:viewportWidth=&quot;24.0&quot;
+    android:viewportHeight=&quot;24.0&quot;&gt;
+&lt;path
+    android:fillColor=&quot;@color/white&quot;
+    android:pathData=&quot;M19,13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z&quot;/&gt;
+&lt;/vector&gt;
+</code></pre><p>如果直接把文件 ic_add_normal 直接设置给会有如下错误</p>
+<pre><code>Caused by: android.view.InflateException: Binary XML file line #58: Error inflating class Button
+</code></pre><p>所以，必须要包裹一下 vector 文件。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;使用-Android-Studio-内置的-vector-生成图标的兼容问题&quot;&gt;&lt;a href=&quot;#使用-Android-Studio-内置的-vector-生成图标的兼容问题&quot; class=&quot;headerlink&quot; title=&quot;使用 Android Studi
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://junaya.cn/tags/Android/"/>
+    
+      <category term="project" scheme="http://junaya.cn/tags/project/"/>
+    
+      <category term="Giraffe" scheme="http://junaya.cn/tags/Giraffe/"/>
+    
+      <category term="vector" scheme="http://junaya.cn/tags/vector/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>TextSwitcher 遇到的坑</title>
+    <link href="http://junaya.cn/2016/11/26/TextSwitcher-%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/"/>
+    <id>http://junaya.cn/2016/11/26/TextSwitcher-遇到的坑/</id>
+    <published>2016-11-25T17:22:20.000Z</published>
+    <updated>2016-11-25T17:36:23.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>例如点击某一详情页面，如果标题内容较长，需要让标题滚动的显示完整的内容。可以使用到 TextSwitcher</p>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>非居中</p>
+<p><img src="https://leanote.com/api/file/getImage?fileId=583871edab6441366c013154" alt="图片标题"></p>
+<p>居中</p>
+<p><img src="https://leanote.com/api/file/getImage?fileId=583871d5ab6441366c01314f" alt="图片标题"><br>为了实现居中效果</p>
+<h2 id="关于-TextSwitcher"><a href="#关于-TextSwitcher" class="headerlink" title="关于 TextSwitcher"></a>关于 TextSwitcher</h2><p>首先点击查看 TextSwitcher 的继承关系</p>
+<blockquote>
+<p>public class TextSwitcher extends ViewSwitcher</p>
+<p>public class ViewSwitcher extends ViewAnimator</p>
+<p>public class ViewAnimator extends FrameLayout</p>
+</blockquote>
+<p>到这里已经够了，TextSwitcher 继承 FrameLayout 来放置 Child，并且根据 Child 的内容来增加动画显示。</p>
+<h2 id="xml-布局"><a href="#xml-布局" class="headerlink" title="xml 布局"></a>xml 布局</h2><pre><code>&lt;android.support.v7.widget.Toolbar
+                android:id=&quot;@+id/toolbar&quot;
+                android:layout_width=&quot;match_parent&quot;
+                android:layout_height=&quot;?attr/actionBarSize&quot;
+                android:layout_gravity=&quot;center_vertical&quot;
+                android:background=&quot;?attr/colorPrimary&quot;
+                android:gravity=&quot;center_vertical&quot;
+                android:theme=&quot;@style/ThemeOverlay.AppCompat.Dark.ActionBar&quot;
+                app:layout_scrollFlags=&quot;scroll|enterAlways&quot;
+                app:popupTheme=&quot;@style/ThemeOverlay.AppCompat.Light&quot;
+                &gt;
+
+                &lt;TextSwitcher
+                    android:id=&quot;@+id/tv_title&quot;
+                    android:layout_width=&quot;match_parent&quot;
+                    android:layout_height=&quot;match_parent&quot;/&gt;
+            &lt;/android.support.v7.widget.Toolbar&gt;
+</code></pre><h2 id="java-中代码"><a href="#java-中代码" class="headerlink" title="java 中代码"></a>java 中代码</h2><p>在 java 中要给 TextSwitcher 创建一个 TextView ，并设置相关的属性，在 java 中解决了 TextView 的 Gravity 属性的有效。 并且要给 setLayoutParams() 设置正确；</p>
+<pre><code>private void initTitle() {
+    mTextSwitcher.setFactory(() -&gt; {
+        TextView textView = new TextView(this);
+        if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.M) {
+            textView.setTextAppearance(R.style.WebTitle);
+        } else {
+            textView.setTextAppearance(this, R.style.WebTitle);
+        }
+        textView.setGravity(Gravity.CENTER_VERTICAL);
+        textView.setSingleLine(true);
+        textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+        textView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+        textView.postDelayed(() -&gt; textView.setSelected(true), 100);
+        return textView;
+    });
+
+    mTextSwitcher.setInAnimation(this, android.R.anim.fade_in);
+    mTextSwitcher.setOutAnimation(this, android.R.anim.fade_out);
+
+    mTextSwitcher.setText(mTitle);
+}
+</code></pre><p>注意该 LayoutParams 必须要使用对应的</p>
+<pre><code>import android.widget.FrameLayout.LayoutParams;
+</code></pre><p>否则会报错。</p>
+<h2 id="sytle-–-R-style-WebTitle"><a href="#sytle-–-R-style-WebTitle" class="headerlink" title="sytle – R.style.WebTitle"></a>sytle – R.style.WebTitle</h2><p>主要设置文字的大小，颜色，和样式。如果要在这里给 textView  设置 Gravity 和其他都是无效的。只有在 java 代码中通过 setFactory 中来设置完成。</p>
+<pre><code>&lt;style name=&quot;WebTitle&quot; parent=&quot;@android:style/TextAppearance&quot;&gt;
+    &lt;item name=&quot;android:textSize&quot;&gt;@dimen/max&lt;/item&gt;
+    &lt;item name=&quot;android:textColor&quot;&gt;@color/white&lt;/item&gt;
+    &lt;item name=&quot;android:ellipsize&quot;&gt;marquee&lt;/item&gt;
+    &lt;item name=&quot;android:marqueeRepeatLimit&quot;&gt;marquee_forever&lt;/item&gt;
+    &lt;item name=&quot;android:scrollHorizontally&quot;&gt;true&lt;/item&gt;
+    &lt;item name=&quot;android:textStyle&quot;&gt;bold&lt;/item&gt;
+&lt;/style&gt;
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;使用场景&quot;&gt;&lt;a href=&quot;#使用场景&quot; class=&quot;headerlink&quot; title=&quot;使用场景&quot;&gt;&lt;/a&gt;使用场景&lt;/h2&gt;&lt;p&gt;例如点击某一详情页面，如果标题内容较长，需要让标题滚动的显示完整的内容。可以使用到 TextSwitcher&lt;/p&gt;
+&lt;h2
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://junaya.cn/tags/Android/"/>
+    
+      <category term="TextSwitcher" scheme="http://junaya.cn/tags/TextSwitcher/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OOM之Giraffe 记事本中使用ClipboardManager不当</title>
+    <link href="http://junaya.cn/2016/11/20/OOM%E4%B9%8BGiraffe-%E8%AE%B0%E4%BA%8B%E6%9C%AC%E4%B8%AD%E4%BD%BF%E7%94%A8ClipboardManager%E4%B8%8D%E5%BD%93/"/>
+    <id>http://junaya.cn/2016/11/20/OOM之Giraffe-记事本中使用ClipboardManager不当/</id>
+    <published>2016-11-20T01:59:45.000Z</published>
+    <updated>2016-11-20T02:00:43.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#记在“使用剪贴版快捷创建 note” 中使用不当造成的内存泄漏问题</p>
+<p><a href="https://github.com/JunaYa/Giraffe/blob/master/app/src/main/java/com/aya/giraffe/module/main/MainActivity.java" target="_blank" rel="external">项目地址 https://github.com/JunaYa/Giraffe </a></p>
+<p>在提交版本中能看提交的历史，<br>使用 LeakCanary 检测</p>
+<p>在代码中我是如下实现</p>
+<p>首先声明 ClipboardManager</p>
+<pre><code>private ClipboardManager clipboard;
+</code></pre><p>在 onCreateView() 中实例 ClipboardManager 并注册剪贴版监听事件</p>
+<pre><code>clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+    clipboard.addPrimaryClipChangedListener(onClipChangedListener);
+</code></pre><p>相应的在 onDestroy() 中反注册监听</p>
+<pre><code>clipboard.removePrimaryClipChangedListener(onClipChangedListener);
+</code></pre><p>剪贴板监听声明并实现内容监听的处理</p>
+<pre><code>private OnPrimaryClipChangedListener onClipChangedListener = new OnPrimaryClipChangedListener() {
+    @Override
+    public void onPrimaryClipChanged() {
+        if (clipboard.hasPrimaryClip()){
+            if (clipboard.getPrimaryClipDescription().hasMimeType(MIMETYPE_TEXT_PLAIN)){
+                ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
+                String pasteData =  item.getText().toString();
+                mSheetPaste.registerData(pasteData,mPagerAdapter.getConfig());
+                mSheetPaste.show();
+            }
+        }
+    }
+};
+</code></pre><p>开始写的时候，根本没考虑太多， 还是 too young ！请看图</p>
+<p><img src="https://leanote.com/api/file/getImage?fileId=58306ecbab644137810057b2" alt="图片标题"></p>
+<p>当我操作点击 home 健出现的该问题</p>
+<p>我又这样尝试做了一次实验</p>
+<p>对于监听事件 onClipChangedListener 我在 onCreate() 中实力化；</p>
+<pre><code>clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+    onClipChangedListener = new OnPrimaryClipChangedListener() {
+        @Override
+        public void onPrimaryClipChanged() {
+            if (clipboard.hasPrimaryClip()){
+                if (clipboard.getPrimaryClipDescription().hasMimeType(MIMETYPE_TEXT_PLAIN)){
+                    ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
+                    String pasteData =  item.getText().toString();
+                    mSheetPaste.registerData(pasteData,mPagerAdapter.getConfig());
+                    mSheetPaste.show();
+                }
+            }
+        }
+    };
+    clipboard.addPrimaryClipChangedListener(onClipChangedListener);
+</code></pre><p>同样多次操作 home 健，结果</p>
+<p><img src="https://leanote.com/api/file/getImage?fileId=58307484ab644137810057ed" alt="图片标题"></p>
+<p> 并不能起什么作用。这到底怎么回事呢？<br> 然后有做了如下尝试，</p>
+<pre><code>private class MyOnPrimaryClipChangedListener implements OnPrimaryClipChangedListener {
+
+    @Override
+    public void onPrimaryClipChanged() {
+        if (clipboard.hasPrimaryClip()){
+            if (clipboard.getPrimaryClipDescription().hasMimeType(MIMETYPE_TEXT_PLAIN)){
+                ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
+                String pasteData =  item.getText().toString();
+                mSheetPaste.registerData(pasteData,mPagerAdapter.getConfig());
+                mSheetPaste.show();
+            }
+        }
+    }
+};
+</code></pre><p>把事件监听写成内部类实现监听，然后 clipboard 使用该</p>
+<pre><code>clipboard.addPrimaryClipChangedListener(new MyOnPrimaryClipChangedListener());
+</code></pre><p>这样就没问题了，因为又注册所以必要的反注册</p>
+<p>所以将内部类声明并实例化，</p>
+<pre><code>clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+    mPrimaryClipChangedListener = new MyOnPrimaryClipChangedListener();
+    clipboard.addPrimaryClipChangedListener(mPrimaryClipChangedListener);
+
+
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+    clipboard.removePrimaryClipChangedListener(mPrimaryClipChangedListener);
+}
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#记在“使用剪贴版快捷创建 note” 中使用不当造成的内存泄漏问题&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/JunaYa/Giraffe/blob/master/app/src/main/java/com/aya/giraffe/module
+    
+    </summary>
+    
+    
+      <category term="OOM" scheme="http://junaya.cn/tags/OOM/"/>
+    
+      <category term="Giraffe" scheme="http://junaya.cn/tags/Giraffe/"/>
+    
+      <category term="内部类" scheme="http://junaya.cn/tags/%E5%86%85%E9%83%A8%E7%B1%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>项目 Giraffe 记事本之AlarmManager+BroadcastReceiver+Service 实现事件提醒</title>
+    <link href="http://junaya.cn/2016/11/18/%E9%A1%B9%E7%9B%AE-Giraffe-%E8%AE%B0%E4%BA%8B%E6%9C%AC%E4%B9%8BAlarmManager-BroadcastReceiver-Service-%E5%AE%9E%E7%8E%B0%E4%BA%8B%E4%BB%B6%E6%8F%90%E9%86%92/"/>
+    <id>http://junaya.cn/2016/11/18/项目-Giraffe-记事本之AlarmManager-BroadcastReceiver-Service-实现事件提醒/</id>
+    <published>2016-11-18T05:57:04.000Z</published>
+    <updated>2016-11-25T17:30:43.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>具体使用请查看项目中</p>
+<p><a href="https://github.com/JunaYa/Giraffe/blob/master/app/src/main/java/com/aya/giraffe/module/main/MainActivity.java" target="_blank" rel="external">项目地址 https://github.com/JunaYa/Giraffe </a></p>
+<p>在项目 Giraffe 中使用 BroadcastReceiver 实现事件提醒 。</p>
+<h1 id="BroadcastReceiver"><a href="#BroadcastReceiver" class="headerlink" title="BroadcastReceiver"></a>BroadcastReceiver</h1><h2 id="标准广播"><a href="#标准广播" class="headerlink" title="标准广播"></a>标准广播</h2><p>是异步广播，广播一经发出去，所有广播接收器会同时收到该条广播，不分先后顺序。标准广播没法拦截，效率高。</p>
+<p>发送广播：</p>
+<pre><code>Intent intent = new Intent(&quot;com.example.broadcasttest.MySelfReceiver&quot;）
+sendBroadcast(intent)
+</code></pre><h2 id="有序广播"><a href="#有序广播" class="headerlink" title="有序广播"></a>有序广播</h2><p>是同步广播，按照广播接收器的接受处理顺序进行传递，只有优先级广播接收器处理完该条广播，才会传递下一个接收器。广播可被拦截。</p>
+<p>发送广播：</p>
+<pre><code>Intent intent = new Intent(&quot;com.example.broadcasttest.MySelfReceiver&quot;）
+
+sendOrderedBroadcast(intent,null);
+</code></pre><p>有序广播可以拦截广播<br>在BroadcastReceiver 中 的 onReceive() 方法中在任务处理结束后添加</p>
+<pre><code>abortBroadcast();
+</code></pre><p>后面没有接受到的广播就不会收到了。<br>在注册广播时可以添加广播的优先级</p>
+<h2 id="本地广播"><a href="#本地广播" class="headerlink" title="本地广播"></a>本地广播</h2><p>本地广播的好处就是，只有本应用可以获得该条广播。是安全的。</p>
+<pre><code>localBroadcastManager = LocalBroadcastManager.getInstance(this);
+
+// 注册广播
+localBroadcastManager.registerReceiver(localReceiver, intentFilter);
+
+// 注销广播
+localBroadcastManager.unregisterReceiver(localReceiver);
+</code></pre><h2 id="广播的注册"><a href="#广播的注册" class="headerlink" title="广播的注册"></a>广播的注册</h2><h3 id="动态注册"><a href="#动态注册" class="headerlink" title="动态注册"></a>动态注册</h3><p>在代码中注册</p>
+<pre><code>// 在使用的时候注册广播
+AlarmReceiver receiver = new AlarmReceiver();
+    IntentFilter filter = new IntentFilter();
+    filter.addAction(&quot;com.aya.giraffe.module.AlarmReceiver&quot;);
+    registerReceiver(receiver,filter);
+</code></pre><p>在接收器中判断 action 是否匹配，action 可以有多条，只要符合一条就可以。详细请看 IntentFilter 的使用。</p>
+<pre><code>//在 onDestroy() 中要注销该广播
+unregisterReceiver(receiver);
+</code></pre><p>它的生命周期为</p>
+<h3 id="静态注册"><a href="#静态注册" class="headerlink" title="静态注册"></a>静态注册</h3><p>在 manifest 中注册<br>，即使应用未启动也能收到广播，只要系统启动就会启动。</p>
+<pre><code>&lt;receiver android:name=&quot;.module.content.AlarmReceiver&quot;&gt;
+
+&lt;/receiver&gt;
+</code></pre><h2 id="IntentFilter"><a href="#IntentFilter" class="headerlink" title="IntentFilter"></a>IntentFilter</h2><p>action 必须有，可以添加多条  ， 只要符合一条即可<br>category 非必需，可以添加多条，但是需要全部符合才可以,有默认值<br>data  非必需，同 action 一样</p>
+<h1 id="实现的内容"><a href="#实现的内容" class="headerlink" title="实现的内容"></a>实现的内容</h1><h2 id="提醒事件"><a href="#提醒事件" class="headerlink" title="提醒事件"></a>提醒事件</h2><p>根据设定的提醒事件时间来准时的提醒用户，该时间点有事件提醒。<br>事件提醒设计的字段有 可查看项目 <a href="https://github.com/JunaYa/Giraffe/blob/master/app/src/main/java/com/aya/giraffe/realmData/RGNote.java" target="_blank" rel="external">Giraffe</a> 的 RGNote 设计</p>
+<pre><code>public String type;
+public RealmList&lt;RTag&gt; tags;
+public String title;
+public String content;
+public Date create_time;
+public Date alarm_time;
+public Date end_time;
+</code></pre><p>根据事件创建时间 create_time 来排序展示， 根据事件提醒事件来 alarm_time 定时提醒用户， 根据 end_time 来设定该事件用户有没有处理，并根据该字段判断是否需要再次为用户提醒该事件。</p>
+<h2 id="逻辑"><a href="#逻辑" class="headerlink" title="逻辑"></a>逻辑</h2><h3 id="KeepLifeAlarmReceiver"><a href="#KeepLifeAlarmReceiver" class="headerlink" title="KeepLifeAlarmReceiver"></a>KeepLifeAlarmReceiver</h3><p>首先注册一个静态广播 KeepLifeAlarmReceiver ，用来监听用户手机屏幕解锁， 得到广播通知去启动后台任务，</p>
+<p>在manifest中</p>
+<pre><code>&lt;receiver android:name=&quot;.module.alarm.KeepLifeAlarmReceiver&quot;&gt;
+       &lt;intent-filter&gt;
+           &lt;action android:name=&quot;android.intent.action.USER_PRESENT&quot;/&gt;
+       &lt;/intent-filter&gt;
+   &lt;/receiver&gt;
+</code></pre><p>android.intent.action.USER_PRESENT 是系统广播，手机屏幕解锁会得到广播通知</p>
+<pre><code>//KeepLifeAlarmReceiver
+// 通知后台服务是否有事件提醒
+
+ @Override
+public void onReceive(Context context, Intent intent) {
+    if (intent!= null &amp;&amp; intent.getAction().equals(intent.ACTION_USER_PRESENT)){
+        context.startService(AlarmNoteService.newInstance(context));
+    }
+}
+</code></pre><h3 id="AlarmNoteService"><a href="#AlarmNoteService" class="headerlink" title="AlarmNoteService"></a>AlarmNoteService</h3><p>在manifest中<br>     <service android:name=".module.alarm.AlarmNoteService"></service></p>
+<p>AlarmNoteService 查询有没有提示的事件， 如果有事件提醒就通知， 如果有今天的事件提醒 使用 AlarmManager 实现，定时发送一个广播去通知用户有事件提醒， AlarmReceiver 用来弹出通知事件。</p>
+<pre><code>// 查询是否有事件提醒
+private void onHandleIntent(){
+  // 如果事件提醒事件已经过期，马上提醒
+  onAlarmNote(rgNote)；
+  // 如果今天有事件需要提醒，则定时通知
+  onRegisterReceiver()；
+}
+
+
+// 通知
+private void onAlarmNote(final RGNote rgNote){
+    //  notify
+}
+
+／/ 注册广播
+private void onRegisterReceiver(){
+    // alarm register receiver
+    // AlarmReceiver
+}
+</code></pre><h2 id="AlarmReceiver"><a href="#AlarmReceiver" class="headerlink" title="AlarmReceiver"></a>AlarmReceiver</h2><p> 得到广播通知</p>
+<p>在 manifest 中注册</p>
+<pre><code>&lt;receiver android:name=&quot;.module.alarm.AlarmReceiver&quot;&gt;
+        &lt;intent-filter&gt;
+            &lt;action android:name=&quot;com.aya.giraffe.module.AlarmReceiver&quot;/&gt;
+        &lt;/intent-filter&gt;
+    &lt;/receiver&gt;
+</code></pre><p>onReceiver  处理，通知</p>
+<pre><code> @Override
+public void onReceive(Context context, Intent intent) {
+    String id = intent.getStringExtra(Constant.ARG_ALARM_ID);
+    String title = intent.getStringExtra(Constant.ARG_ALARM_TITLE);
+    String content = intent.getStringExtra(Constant.ARG_ALARM_CONTENT);
+    NotifyUtils.showNotify(context,id, title, content);
+}
+</code></pre><p>详细请查看项目源码<br><a href="https://github.com/JunaYa/Giraffe/blob/master/app/src/main/java/com/aya/giraffe/module/main/MainActivity.java" target="_blank" rel="external">项目地址 https://github.com/JunaYa/Giraffe </a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;具体使用请查看项目中&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/JunaYa/Giraffe/blob/master/app/src/main/java/com/aya/giraffe/module/main/MainActivity.java&quot;
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://junaya.cn/tags/Android/"/>
+    
+      <category term="project" scheme="http://junaya.cn/tags/project/"/>
+    
+      <category term="Giraffe" scheme="http://junaya.cn/tags/Giraffe/"/>
+    
+      <category term="AlarmManager" scheme="http://junaya.cn/tags/AlarmManager/"/>
+    
+      <category term="BroadcastReceiver" scheme="http://junaya.cn/tags/BroadcastReceiver/"/>
+    
+      <category term="Service" scheme="http://junaya.cn/tags/Service/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>项目 Giraffe 记事本之 BottomSheetDialog 使用</title>
+    <link href="http://junaya.cn/2016/11/17/%E9%A1%B9%E7%9B%AE-Giraffe-%E8%AE%B0%E4%BA%8B%E6%9C%AC%E4%B9%8B-BottomSheetDialog-%E4%BD%BF%E7%94%A8/"/>
+    <id>http://junaya.cn/2016/11/17/项目-Giraffe-记事本之-BottomSheetDialog-使用/</id>
+    <published>2016-11-17T11:33:11.000Z</published>
+    <updated>2016-11-25T17:30:40.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>具体使用请查看项目中</p>
+<p><a href="https://github.com/JunaYa/Giraffe/blob/master/app/src/main/java/com/aya/giraffe/module/writer/BottomSheetWriter.java" target="_blank" rel="external">项目 Giraffe 中的 BottomSheetWriter地址</a></p>
+<h1 id="使用-BottomSheetDialog-作为弹出控件"><a href="#使用-BottomSheetDialog-作为弹出控件" class="headerlink" title="使用 BottomSheetDialog 作为弹出控件"></a>使用 BottomSheetDialog 作为弹出控件</h1><p>传统的弹出框操作使用的有 PopuWindow 、 Dialog .项目中使用的是 BottomSheetDialog</p>
+<p>BottomSheetDialog 顾名思义， 它也是一个 Dialog ，一个可以从底部优雅的滑出来的一个 Dialog</p>
+<pre><code>BottomSheetDialog extends AppCompatDialog
+
+AppCompatDialog extends Dialog
+</code></pre><h2 id="项目中使用"><a href="#项目中使用" class="headerlink" title="项目中使用"></a>项目中使用</h2><ul>
+<li>创建 BottomSheetWriter 来处理事件记录的界面和逻辑。使用了 Dagger ，一切使用起来简单又简洁。把它隔离开来。</li>
+</ul>
+<blockquote>
+<ul>
+<li>在  BottomSheetWriter 中 声明BottomSheetDialog</li>
+</ul>
+</blockquote>
+<pre><code>// 项目使用了 DataBinding  
+private DialogEditBinding mBinding;
+private BottomSheetDialog mSheetDialog;
+</code></pre><blockquote>
+<ul>
+<li>在构造函数中初始化</li>
+</ul>
+</blockquote>
+<pre><code>@Inject
+    public BottomSheetWriter(@ActivityContext Context context) {
+        View rootView = LayoutInflater.from(context).inflate(R.layout.dialog_edit, null);
+        mBinding = DataBindingUtil.bind(rootView);
+
+        mSheetDialog = new BottomSheetDialog(context, R.style.BottomSheetDialogStyle);
+        mSheetDialog.setContentView(rootView);
+        mSheetDialog.setCancelable(false);
+        mSheetDialog.setCanceledOnTouchOutside(true);
+    }
+</code></pre><p>其中 R.style.BottomSheetDialogStyle 的内容为：</p>
+<pre><code>&lt;style name=&quot;BottomSheetDialogStyle&quot; parent=&quot;Theme.Design.BottomSheetDialog&quot;&gt;
+    &lt;item name=&quot;android:colorBackground&quot;&gt;@android:color/transparent&lt;/item&gt;
+&lt;/style&gt;
+</code></pre><p>主要是为了解决自己设置背景，比如要给整个 Dialog  弹出界面做成一个带有圆角的样式。 这时候，如果单纯给  rootView 一个背景 shape， 该 shape 设置它的 TopRight 和 TopLeft 的圆角。 但是会把应用自带的背景色显示出来。查看过 BottomSheetDialog 的 value 设置， windowBackground 并不起作用 ， 真正管理 BottomSheetDialog 的背景的是 android:colorBackground ，给它的值设置为透明即可。</p>
+<h2 id="BottomSheetDialog-方法"><a href="#BottomSheetDialog-方法" class="headerlink" title="BottomSheetDialog 方法"></a>BottomSheetDialog 方法</h2><blockquote>
+<pre><code>setCancelable(boolean cancelable)
+</code></pre><p>返回键点击时候取消</p>
+<p>setCanceledOnTouchOutside(boolean cancel)<br>点击 BottomSheetDialog 外部是否允许取消</p>
+<ul>
+<li><p>setContentView(View view)<br>给 BottomSheetDialog  设置内容 view</p>
+</li>
+<li><p>show() 显示 hide() 隐藏 dismiss()</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h2><p>当让这里肯定会有一些点击事件的处理。 因为项目中使用的 Realm 做存储 ，所以在 BottomSheetWriter 中拿到 Realm 将内容存储即可， 所以点击事件就在 BottomSheetWriter 中处理。如果跟 Activity 或者 Fragment 交互，需要自己写一个接口来做点击回调处理。</p>
+<p>还有就是根据自己的需求进行设计，如果单纯的要拿 BottomSheetDialog 中的内容的话，可以给 BottomSheetDialog 传一个 TextView 或者 holder ，直接把点击事件要赋予的值设置给 Textview 或者 holder ，然后在 Activity／Fragment 中获取 TextView 的值。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;具体使用请查看项目中&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/JunaYa/Giraffe/blob/master/app/src/main/java/com/aya/giraffe/module/writer/BottomSheetWrite
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://junaya.cn/tags/Android/"/>
+    
+      <category term="project" scheme="http://junaya.cn/tags/project/"/>
+    
+      <category term="Giraffe" scheme="http://junaya.cn/tags/Giraffe/"/>
+    
+      <category term="BottomSheetDialog" scheme="http://junaya.cn/tags/BottomSheetDialog/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>项目 Giraffe 记事本之剪贴板应用</title>
+    <link href="http://junaya.cn/2016/11/17/%E9%A1%B9%E7%9B%AE-Giraffe-%E8%AE%B0%E4%BA%8B%E6%9C%AC%E4%B9%8B%E5%89%AA%E8%B4%B4%E6%9D%BF%E5%BA%94%E7%94%A8/"/>
+    <id>http://junaya.cn/2016/11/17/项目-Giraffe-记事本之剪贴板应用/</id>
+    <published>2016-11-17T10:52:10.000Z</published>
+    <updated>2016-11-25T17:30:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>具体使用请查看项目中</p>
+<p><a href="https://github.com/JunaYa/Giraffe/blob/master/app/src/main/java/com/aya/giraffe/module/main/MainActivity.java" target="_blank" rel="external">项目地址 https://github.com/JunaYa/Giraffe </a></p>
+<h1 id="使用剪贴版快捷创建-note"><a href="#使用剪贴版快捷创建-note" class="headerlink" title="使用剪贴版快捷创建 note"></a>使用剪贴版快捷创建 note</h1><p>在其他应用中复制的内容将要作为 note 的 title 或者 content 。当用户把界面切换到 Giraffe 时，在 onResume()  中监听剪贴版的内容是否有改变。如果是新的内容，则将复制的内容作为 note 的 title 或者 content 由用户选择，默认是作为 title 使用，并且用户可以选择将要创建的 note 的 type 。用户点击 选择的创建类型后就会弹出创建 note 的操作，并且用户选择复制的内容放在 title 或 content 的输入位置，补充完整内容，就可以创建保存。</p>
+<h2 id="主要知识点"><a href="#主要知识点" class="headerlink" title="主要知识点"></a>主要知识点</h2><p><a href="https://developer.android.com/guide/topics/text/copy-paste.html#Clipboard" target="_blank" rel="external">官方文档</a></p>
+<blockquote>
+<ul>
+<li>ClipboardManager</li>
+</ul>
+</blockquote>
+<p>剪贴版内容可以有三种</p>
+<ul>
+<li>URI 尽管允许任何 URI ，但是通常是 content provider URI</li>
+<li>Text ： 返回的是  CharSequence</li>
+<li><p>Intent  ：此数据类型允许您将应用程序快捷方式复制到剪贴板。然后用户可以将快捷方式粘贴到其应用程序中以供将来使用</p>
+<p>在项目中主要使用了其中的文字粘贴功能。参见代码：</p>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>Interface to the clipboard service, for placing and retrieving text in the global clipboard.<br>每次只能有一个数据在剪贴板上。</li>
+</ul>
+</blockquote>
+<h2 id="项目中的代码"><a href="#项目中的代码" class="headerlink" title="项目中的代码"></a>项目中的代码</h2><pre><code>//获取  ClipboardManager
+ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+
+// 构造出监听事件
+ OnPrimaryClipChangedListener onClipChangedListener = new OnPrimaryClipChangedListener() {
+    @Override
+    public void onPrimaryClipChanged() {
+        // do something
+    }
+};
+
+// 给 clipboard 添加监听事件，
+ clipboard.addPrimaryClipChangedListener(onClipChangedListener);
+
+// 注销监听事件
+clipboard.removePrimaryClipChangedListener(onClipChangedListener);
+
+// 判断是否有内容
+clipboard.hasPrimaryClip()
+// 内容是否为文本（项目中只用到该类型）
+clipboard.getPrimaryClipDescription().hasMimeType(MIMETYPE_TEXT_PLAIN)
+
+// 复制文本， 该 count 返回的一直是 1
+int count = clipboard.getPrimaryClip().getItemCount();
+
+// 获取到剪贴板内容
+ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
+
+// 获取内容里的真正文本
+String pasteData =  item.getText().toString();
+
+// 自己的需求处理
+mSheetPaste.registerData(pasteData,mPagerAdapter.getConfig());
+mSheetPaste.show();
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;具体使用请查看项目中&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/JunaYa/Giraffe/blob/master/app/src/main/java/com/aya/giraffe/module/main/MainActivity.java&quot;
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://junaya.cn/tags/Android/"/>
+    
+      <category term="project" scheme="http://junaya.cn/tags/project/"/>
+    
+      <category term="Giraffe" scheme="http://junaya.cn/tags/Giraffe/"/>
+    
+      <category term="ClipboardManager" scheme="http://junaya.cn/tags/ClipboardManager/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android ViewStub 的重复使用</title>
+    <link href="http://junaya.cn/2016/11/08/Android-ViewStub-%E7%9A%84%E9%87%8D%E5%A4%8D%E4%BD%BF%E7%94%A8/"/>
+    <id>http://junaya.cn/2016/11/08/Android-ViewStub-的重复使用/</id>
+    <published>2016-11-08T15:38:51.000Z</published>
+    <updated>2016-11-08T16:21:54.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在项目中使用的时候遇到的问题以及解决，做以记录。</p>
+<p>项目文件地址<br><a href="https://github.com/JunaYa/Giraffe/blob/master/app/src/main/java/com/aya/giraffe/module/content/NoteListFragment.java" target="_blank" rel="external">https://github.com/JunaYa/Giraffe/blob/master/app/src/main/java/com/aya/giraffe/module/content/NoteListFragment.java</a></p>
+<p>布局使用的是 DataBinding</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;layout
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+    &lt;data&gt;
+        &lt;variable
+            name=&quot;viewModel&quot;
+            type=&quot;com.aya.giraffe.module.content.NoteListViewModel&quot;/&gt;
+    &lt;/data&gt;
+
+    &lt;LinearLayout
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot;
+        android:orientation=&quot;vertical&quot;
+        &gt;
+
+        &lt;ViewStub
+            android:id=&quot;@+id/stub&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;match_parent&quot;
+            android:inflatedId=&quot;@+id/subTree&quot;
+            android:layout=&quot;@layout/stub_empty_view&quot;/&gt;
+
+        &lt;android.support.v7.widget.RecyclerView
+            android:id=&quot;@+id/recycler&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;match_parent&quot;/&gt;
+
+    &lt;/LinearLayout&gt;
+&lt;/layout&gt;
+</code></pre><p>这里所说的重复使用场景是，比如获取数据时，数据为空，或者数据请求出错。这是如果使用 ViewStub 的话，就要这样使用</p>
+<pre><code>mBinding.stub.getViewStub().inflate();
+</code></pre><p>因为我有删除操作，当我把数据清空时，需要再次显示空数据提示。因为 ViewStub  的作用就是 inflate 一次，就是把其中的<br>    android:layout=”@layout/stub_empty_view”</p>
+<p>布局添加到自己身上，把自己移除，当你再次想要 inflate 的时候，会返回一个空。<br>这是只能通过操作已经添加上来的 view 来操纵显示隐藏或其他功能。</p>
+<pre><code>mBinding.stub.getRoot().setVisibility(View.GONE);
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在项目中使用的时候遇到的问题以及解决，做以记录。&lt;/p&gt;
+&lt;p&gt;项目文件地址&lt;br&gt;&lt;a href=&quot;https://github.com/JunaYa/Giraffe/blob/master/app/src/main/java/com/aya/giraffe/module
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://junaya.cn/tags/Android/"/>
+    
+      <category term="ViewStub" scheme="http://junaya.cn/tags/ViewStub/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java 后台开发之---小蓝图</title>
+    <link href="http://junaya.cn/2016/11/07/Java-%E5%90%8E%E5%8F%B0%E5%BC%80%E5%8F%91%E4%B9%8B-%E5%B0%8F%E8%93%9D%E5%9B%BE/"/>
+    <id>http://junaya.cn/2016/11/07/Java-后台开发之-小蓝图/</id>
+    <published>2016-11-07T15:49:45.000Z</published>
+    <updated>2016-11-07T16:10:32.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>有机会能参与大神的自己项目，而且这个团队有这么对牛人。这是个非常好的机会。但是看到服务端的代码的时候，自己尝试看了看，也是这添加代码。结果没有跑通， 所以在网上查看了相关的资料。所以决定从开始把相关知识的学习，作为博客类似的笔记记录下来，分享于此，有助于推动自己的不断努力，也希望能帮助到想要一起学习 Java 后台开发的朋友。因为自己是做安卓开发的，对于 gradle 构建项目比较喜欢。所以学习的练习项目打算做一个自己的博客后台，后续可能会学习 react 前端，也可以把接口拿来使用。 自己最近也在学习 react-native 。学习的比较多， 这里一把手，那里又一把手，不亦乐乎。学习这些的时候呢比较喜欢做一个小项目来边学边做 ，因为语言规范好学 ，在用到的时候就可以学习。初期简单的过一遍就可以。在慕课网又看到一系列的 Java 开发课程，自己也在学习该课程。</p>
+<p>从零开始的 Java 后台开发， 这一些列讲学习使用</p>
+</blockquote>
+<ul>
+<li>[ ]  Spring</li>
+<li>[ ]  Spring Security</li>
+<li>[ ]  Spring Boot</li>
+<li>[ ]  Spring Web</li>
+<li>[ ]  Spring JDBC</li>
+<li>[ ]  Spring Boot Devtools</li>
+<li>[ ]  Spring MVC</li>
+<li>[ ]  Spring Actuator</li>
+<li>[ ]  H2</li>
+<li>[ ]  MyBatis</li>
+<li>[x]  MySQL</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;有机会能参与大神的自己项目，而且这个团队有这么对牛人。这是个非常好的机会。但是看到服务端的代码的时候，自己尝试看了看，也是这添加代码。结果没有跑通， 所以在网上查看了相关的资料。所以决定从开始把相关知识的学习，作为博客类似的笔记记录下来，分享于此，
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://junaya.cn/tags/java/"/>
+    
+      <category term="project" scheme="http://junaya.cn/tags/project/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java 后台开发之-（MySQL for mac 的初识）</title>
+    <link href="http://junaya.cn/2016/11/07/MySQL-for-mac-%E7%9A%84%E5%88%9D%E8%AF%86/"/>
+    <id>http://junaya.cn/2016/11/07/MySQL-for-mac-的初识/</id>
+    <published>2016-11-07T15:41:04.000Z</published>
+    <updated>2016-11-14T09:25:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近在重新学习搞起 Java 后台这块儿，因为想跟大神么一起做点事情，所以必须学起来。这一系列的笔记将会记录自己所学习后台开发这些点滴，这样记录下来有助于自己以后查看，也希望能帮到跟我一样的朋友，从零开始的异世界 ，no ， 是从零开始的 Java 后台开发。<br>今天把数据安装完毕， 试了试简单的 SQL 语句。</p>
+<h2 id="install"><a href="#install" class="headerlink" title="install"></a>install</h2><p>点击安装就 OK</p>
+<p>安装完毕的弹出提示要切记，把密码记下，登录时需要密码</p>
+<p>2016-11-06T03:27:25.257692Z 1 [Note] A temporary password is generated for root@localhost: U0:E5evpyZ&amp;N</p>
+<h2 id="change-password"><a href="#change-password" class="headerlink" title="change password"></a>change password</h2><p>但是每次登录比较费事，生成的密码太繁琐，也不可能每次都输入一大串。所以需要修改密码，方便登录登录<br>首先把秘密清除，永远不输入密码，然后会提示设置密码，这样再设置自己的密码</p>
+<pre><code>ALTER USER &apos;root&apos;@&apos;localhost&apos; PASSWORD EXPIRE NEVER;
+</code></pre><p><img src="https://leanote.com/api/file/getImage?fileId=581ea846ab644165e50013bf" alt="图片标题"></p>
+<pre><code>SET PASSWORD FOR &apos;root&apos;@&apos;localhost&apos; = PASSWORD(&apos;your-new-password&apos;);
+</code></pre><p><img src="https://leanote.com/api/file/getImage?fileId=581ea827ab644165e50013be" alt="图片标题"></p>
+<p>前后安装了有 6，7 回， 汗！</p>
+<h2 id="uninstall"><a href="#uninstall" class="headerlink" title="uninstall"></a>uninstall</h2><pre><code>再安装过程中，有忘记记录密码的，可以卸载重新安装，很快的，但是要切记记下密码区，其中有的没有被创建，忽略
+
+ sudo rm /usr/local/mysql  
+ sudo rm -rf /usr/local/mysql*  
+ sudo rm -rf /Library/StartupItems/MySQLCOM  
+ sudo rm -rf /Library/PreferencePanes/My*  
+ sudo rm -rf /Library/Receipts/mysql*  
+ sudo rm -rf /Library/Receipts/MySQL*  
+ sudo rm -rf /var/db/receipts/com.mysql.*
+</code></pre><h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><p>sql  语句结束要以 ; 符号结尾，不然会出现 -&gt; 。 不区分大小写</p>
+<h3 id="查看创建了多少数据库"><a href="#查看创建了多少数据库" class="headerlink" title="查看创建了多少数据库"></a>查看创建了多少数据库</h3><pre><code>show Databases;
+</code></pre><p>##3 创建数据库</p>
+<pre><code>create database 数据库名 character set gbk
+// character set gbk 设定数据库字符编码格式为 gbk
+</code></pre><h3 id="选择所要操作的数据库"><a href="#选择所要操作的数据库" class="headerlink" title="选择所要操作的数据库"></a>选择所要操作的数据库</h3><p>选择使用数据库有两种方法</p>
+<pre><code>// 登录前
+mysql -D 数据库名 -u root -p
+
+// 登录后
+use 数据库名
+</code></pre><h3 id="展示当前数据库的表结构"><a href="#展示当前数据库的表结构" class="headerlink" title="展示当前数据库的表结构"></a>展示当前数据库的表结构</h3><pre><code>show tables
+</code></pre><h3 id="查看表创建的过程"><a href="#查看表创建的过程" class="headerlink" title="查看表创建的过程"></a>查看表创建的过程</h3><pre><code>show create table 表名
+</code></pre><h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><pre><code>CREATE TABLE student (
+  uid       INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  username  VARCHAR(255) NOT NULL UNIQUE,
+  mobile    VARCHAR(255) UNIQUE,
+  password  VARCHAR(255) NOT NULL,
+  appId     INT       DEFAULT 1,
+  loginAt   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  expiresAt TIMESTAMP,
+  isLocked  BOOLEAN   DEFAULT FALSE
+);
+</code></pre><blockquote>
+<ul>
+<li>int  指定该列的数据类型为 int 取值范围为 -8388608到8388607</li>
+<li>unsigned 无符号型</li>
+<li>AUTO_INCREMENT 自动增长</li>
+<li>NOT NULL 不为空</li>
+<li>UNIQUE 唯一约束</li>
+<li>DEFAULT 允许传入为空，但是会提供一个默认数据，</li>
+</ul>
+</blockquote>
+<p>对已经创建好的表，对字段添加约束</p>
+<pre><code>ALTER TABLE student ADD unique(`username`);
+</code></pre><h3 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h3><pre><code>insert into 表名 (列名1, 列名2, 列名3, ...) values (值1, 值2, 值3, ...);
+</code></pre><h3 id="删除表中的数"><a href="#删除表中的数" class="headerlink" title="删除表中的数"></a>删除表中的数</h3><pre><code>delete from 表名称 where 删除条件;
+</code></pre><h3 id="更新表中的数据"><a href="#更新表中的数据" class="headerlink" title="更新表中的数据"></a>更新表中的数据</h3><pre><code>update 表名称 set 列名称1=新值 , 列名称2=新值 where 更新条件;
+</code></pre><h3 id="查询表中的数据"><a href="#查询表中的数据" class="headerlink" title="查询表中的数据"></a>查询表中的数据</h3><pre><code>select 列名称 from 表名称 查询条件;
+</code></pre><h3 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h3><pre><code>drop table  表名称;
+</code></pre><p>最后，复杂的 SQL 语句在项目中会使用到。项目开始的时候会把练习项目放到 GitHub 上。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近在重新学习搞起 Java 后台这块儿，因为想跟大神么一起做点事情，所以必须学起来。这一系列的笔记将会记录自己所学习后台开发这些点滴，这样记录下来有助于自己以后查看，也希望能帮到跟我一样的朋友，从零开始的异世界 ，no ， 是从零开始的 Java 后台开发。&lt;br&gt;今天把
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="http://junaya.cn/tags/Java/"/>
+    
+      <category term="MySQL" scheme="http://junaya.cn/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>排序算法</title>
+    <link href="http://junaya.cn/2016/11/06/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"/>
+    <id>http://junaya.cn/2016/11/06/排序算法/</id>
+    <published>2016-11-06T08:00:17.000Z</published>
+    <updated>2016-11-06T08:07:21.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>参考<br><a href="https://algorithm.yuanbin.me/zh-hans/basics_sorting/insertion_sort.html" target="_blank" rel="external">有直观的排序过程，多种语言</a></p>
+<h3 id="交换排序"><a href="#交换排序" class="headerlink" title="交换排序"></a>交换排序</h3><h3 id="冒泡"><a href="#冒泡" class="headerlink" title="冒泡"></a>冒泡</h3><pre><code>public static void bubbleSort(int[] array) {
+    int len = array.length;
+    for (int i = 0; i &lt; len; i++) {
+        for (int j = 1; j &lt; len - i; j++) {
+            if (array[j - 1] &gt; array[j]) {
+                int temp = array[j - 1];
+                array[j - 1] = array[j];
+                array[j] = temp;
+            }
+        }
+    }
+}
+</code></pre><p>持续比较相邻元素，大的挪到后面，因此大的会逐步往后挪<br>平均情况与最坏情况均为 $O(n^2)$ , 使用了 temp 作为临时交换变量，空间复杂度为 O(1)</p>
+<h4 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h4><pre><code> public static void insertionSort(int[] array) {
+    int len = array.length;
+    int i = 0 ;
+    for ( i = 0; i &lt; len; i++) {
+        int index = i, array_i = array[i];
+        while (index &gt; 0 &amp;&amp; array[index - 1] &gt; array_i) {
+            array[index] = array[index - 1];
+            index -= 1;
+        }
+        array[index] = array_i;
+    }
+}
+</code></pre><p>1,从第一个元素开始，该元素可认为已排序<br>2,取下一个元素，对已排序数组从后往前扫描<br>3,若从排序数组中取出的元素大于新元素，则移至下一位置<br>4,重复步骤3，直至找到已排序元素小于或等于新元素的位置<br>5,插入新元素至该位置<br>6,重复2~5</p>
+<h4 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h4><p>伪代码</p>
+<pre><code>void SelectedSort(int List[] , int N){
+  //将 N 个整数 List[0] ... List[N] 进行递减排序
+  for ( i = 0 ; i &lt; N ; l ++ ){
+   MinPosition = findMin( List ,i , N-1 );
+   // 从 List [i] 到 list[N-1] 中找最小元，并把它的位置给 MinPosition
+   Swap（ List[i] ,List[MinPositino] );
+   // 将未排序部分的最小元换到这部分最后位置
+  }
+}
+
+ public static void selectionSort(int[] array) {
+    int len = array.length;
+    int i = 0, j = 0;
+    for ( i = 0 ; i &lt; len; i++) {
+
+        int min_index = i;
+        for ( j = i + 1; j &lt; len; j++) {
+            if (array[j] &lt; array[min_index]) {
+                min_index = j;
+            }
+        }
+        int temp = array[min_index];
+        array[min_index] = array[i];
+        array[i] = temp;
+    }
+}
+</code></pre><p>不断地选择剩余元素中的最小者<br>1,找到数组中最小元素并将其和数组第一个元素交换位置。<br>2,在剩下的元素中找到最小元素并将其与数组第二个元素交换，直至整个数组排序。</p>
+<p>比较次数=(N-1)+(N-2)+(N-3)+…+2+1~N^2/2<br>交换次数=N<br>运行时间与输入无关<br>数据移动最少</p>
+<h4 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h4><pre><code>public static void quickSort(int[] array) {
+    quickSort(array, 0, array.length - 1);
+}
+
+public static void quickSort(int[] array, int l, int u) {
+
+    if (l &gt;= u) return;
+    int m = l;
+    for (int i = l + 1; i &lt;= u; i++) {
+        if (array[i] &lt; array[l]) {
+            m += 1;
+            int temp = array[m];
+            array[m] = array[i];
+            array[i] = temp;
+        }
+    }
+    // swap between array[m] and array[l]
+    // put pivot in the mid
+    int temp = array[m];
+    array[m] = array[l];
+    array[l] = temp;
+
+    quickSort(array, l, m - 1);
+    quickSort(array, m + 1, u);
+}
+</code></pre><p>1,定基准——首先随机选择一个元素最为基准<br>2,划分区——所有比基准小的元素置于基准左侧，比基准大的元素置于右侧<br>3,递归调用——递归地调用此切分过程</p>
+<h4 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h4><p>分而治之<br>原地归并</p>
+<pre><code> public static void mergeSort(int[] array) {
+    sort(array, 0, array.length - 1);
+}
+
+
+public static void sort(int[] array, int low, int high) {
+    if (high &lt;= low) return;
+    int mid = low + (high - low) / 2;
+    sort(array, low, mid);
+    sort(array, mid + 1, high);
+    merge(array, low, mid, high);
+}
+
+private static void merge(int[] array, int low, int mid, int high) {
+    int[] helper = new int[array.length];
+    // copy array to helper
+    for (int k = low; k &lt;= high; k++) {
+        helper[k] = array[k];
+    }
+    // merge array[low...mid] and array[mid + 1...high]
+    int i = low, j = mid + 1;
+    for (int k = low; k &lt;= high; k++) {
+        // k means current location
+        if (i &gt; mid) {
+            // no item in left part
+            array[k] = helper[j];
+            j++;
+        } else if (j &gt; high) {
+            // no item in right part
+            array[k] = helper[i];
+            i++;
+        } else if (helper[i] &gt; helper[j]) {
+            // get smaller item in the right side
+            array[k] = helper[j];
+            j++;
+        } else {
+            // get smaller item in the left side
+            array[k] = helper[i];
+            i++;
+        }
+    }
+}
+</code></pre><h4 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h4><pre><code>public void sort(int[] nums, boolean ascending) {
+    if (ascending) {
+        // build max heap
+        maxHeap(nums, nums.length);
+        // heap sort
+        for (int i = nums.length - 1; i &gt;= 0; i--) {
+            int temp = nums[0];
+            nums[0] = nums[i];
+            nums[i] = temp;
+            // reconstruct max heap
+            maxHeap(nums, i);
+        }
+    } else {
+        // build min heap
+        minHeap(nums, nums.length);
+        // heap sort
+        for (int i = nums.length - 1; i &gt;= 0; i--) {
+            int temp = nums[0];
+            nums[0] = nums[i];
+            nums[i] = temp;
+            // reconstruct min heap
+            minHeap(nums, i);
+        }
+    }
+}
+
+// sign = 1 ==&gt; min-heap, sign = -1 ==&gt; max-heap
+private void siftDown(int[] nums, int k, int size, int sign) {
+    int half = (size &gt;&gt;&gt; 1);
+    while (k &lt; half) {
+        int index = k;
+        // left leaf node search
+        int l = (k &lt;&lt; 1) + 1;
+        if (l &lt; size &amp;&amp; (sign * nums[l]) &lt; (sign * nums[index])) {
+            index = l;
+        }
+        // right leaf node search
+        int r = l + 1;
+        if (r &lt; size &amp;&amp; (sign * nums[r]) &lt; (sign * nums[index])) {
+            index = r;
+        }
+        // already heapify
+        if (k == index) break;
+        // keep the root node the smallest/largest
+        int temp = nums[k];
+        nums[k] = nums[index];
+        nums[index] = temp;
+        // adjust next index
+        k = index;
+    }
+}
+
+private void minHeap(int[] nums, int size) {
+    heapify(nums, size, 1);
+}
+
+private void maxHeap(int[] nums, int size) {
+    heapify(nums, size, -1);
+}
+
+private void heapify(int[] nums, int size, int sign) {
+    for (int i = size / 2; i &gt;= 0; i--) {
+        siftDown(nums, i, size, sign);
+    }
+}
+</code></pre><ul>
+<li>[ ]  希尔</li>
+<li>[ ]  线性排序</li>
+<li><p>[ ]  桶排序</p>
+<h2 id="查找算法"><a href="#查找算法" class="headerlink" title="查找算法"></a>查找算法</h2></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;参考&lt;br&gt;&lt;a href=&quot;https://algorithm.yuanbin.me/zh-hans/basics_sorting/insertion_sort.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;有直观的排序过程，多种语言&lt;/a&gt;&lt;
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="http://junaya.cn/tags/Java/"/>
+    
+      <category term="排序算法" scheme="http://junaya.cn/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java 基础</title>
+    <link href="http://junaya.cn/2016/11/05/Java-%E5%9F%BA%E7%A1%80/"/>
+    <id>http://junaya.cn/2016/11/05/Java-基础/</id>
+    <published>2016-11-05T01:13:31.000Z</published>
+    <updated>2016-11-07T15:47:19.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="int-和-Integer"><a href="#int-和-Integer" class="headerlink" title="int  和 Integer"></a>int  和 Integer</h2><p>Java 中的数据类型分为基本数据类型和复杂数据类型<br>从大的方面来说就是基本数据类型与其包装类的区别：<br>int 是基本类型，直接存数值，而integer是对象，用一个引用指向这个对象。如果要将 int 作为对象使用，需要使用 Integer 来声明对象。<br>类似的还有：float Float;double Double<br>使用范型<br>ArrayList<integer> al=new ArrayList();</integer></p>
+<h2 id="String-StringBuffer-StringBuilder"><a href="#String-StringBuffer-StringBuilder" class="headerlink" title="String StringBuffer StringBuilder"></a>String StringBuffer StringBuilder</h2><blockquote>
+<p>String 字符串常量</p>
+<p>StringBuffer 字符串变量（线程安全）</p>
+<p>StringBuilder 字符串变量（非线程安全）</p>
+<ul>
+<li><p>String 类型和 StringBuffer 类型的主要性能区别其实在于 String 是不可变的对象由 final 修饰, 因此在每次对 String 类型进行改变的时候其实都等同于生成了一个新的 String 对象，然后将指针指向新的 String 对象，所以经常改变内容的字符串最好不要用String ，因为每次生成对象都会对系统性能产生影响，特别当内存中无引用对象多了以后,JVM 的 GC 就会开始工作，那速度是一定会相当慢的。</p>
+</li>
+<li><p>StringBuffer 线程安全的可变字符序列。每次对自己本身操作，不生成新对象。如果是 String s = “this “ + “is “ +” string” ;, 那么在 JVM 中就会按照 String s = “this is string” ; 处理。如果是</p>
+</li>
+</ul>
+</blockquote>
+<pre><code>for(String s:Strs){
+        temp += s;
+}
+
+//那么最好就是用 StringBuffer  来拼接。
+
+StringBuffer buffer = new StringBuffer();
+for(String s:Strs){
+        buffer.append(s);
+}
+</code></pre><blockquote>
+<ul>
+<li>StringBuilder 一个可变的字符序列是5.0新增的。此类提供一个与 StringBuffer 兼容的 API，但不保证同步。该类被设计用作 StringBuffer 的一个简易替换，用在字符串缓冲区被单个线程使用的时候（这种情况很普遍）,因为在大多数实现中，它比 StringBuffer 要快。</li>
+</ul>
+</blockquote>
+<h2 id="抽象类接口区别"><a href="#抽象类接口区别" class="headerlink" title="抽象类接口区别"></a>抽象类接口区别</h2><table>
+<thead>
+<tr>
+<th>对比</th>
+<th style="text-align:right">接口</th>
+<th style="text-align:center">抽象类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>默认的方法实现</td>
+<td style="text-align:right">默认的方法实现完全是抽象的</td>
+<td style="text-align:center">不存在实现方法</td>
+</tr>
+<tr>
+<td>实现 子类</td>
+<td style="text-align:right">extends 关键字，如果子类不是抽象类的话，它需要提供抽象类中所有声明的方法的实现</td>
+<td style="text-align:center">implement 关键字，需要提供接口中所有声明的方法的实现</td>
+</tr>
+<tr>
+<td>构造器</td>
+<td style="text-align:right">可以有</td>
+<td style="text-align:center">不可以</td>
+</tr>
+<tr>
+<td>与正常 Java 类的区别</td>
+<td style="text-align:right">除了不能实现抽象方法 ，其他相同</td>
+<td style="text-align:center">完全不同</td>
+</tr>
+<tr>
+<td>访问修饰符</td>
+<td style="text-align:right">public、protected 和 default</td>
+<td style="text-align:center">public</td>
+</tr>
+<tr>
+<td>main方法</td>
+<td style="text-align:right">有 main 方法并能运行</td>
+<td style="text-align:center">没有</td>
+</tr>
+<tr>
+<td>多继承</td>
+<td style="text-align:right">只能有一个</td>
+<td style="text-align:center">可以有多个</td>
+</tr>
+<tr>
+<td>速度</td>
+<td style="text-align:right">较快</td>
+<td style="text-align:center">较慢，需要时间去寻找在类中实现的方法</td>
+</tr>
+<tr>
+<td>添加新方法</td>
+<td style="text-align:right">可以提供默认实现</td>
+<td style="text-align:center">必须改变实现接口类</td>
+</tr>
+</tbody>
+</table>
+<h2 id="HashMap-HashTable"><a href="#HashMap-HashTable" class="headerlink" title="HashMap  HashTable"></a>HashMap  HashTable</h2><table>
+<thead>
+<tr>
+<th>对比</th>
+<th style="text-align:right">HashMap</th>
+<th style="text-align:center">HashTable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>继承实现</td>
+<td style="text-align:right">继承于AbstractMap,AbstractMap完成了Map接口</td>
+<td style="text-align:center">基于陈旧的Dictionary类，完成了Map接口</td>
+</tr>
+<tr>
+<td>安全</td>
+<td style="text-align:right">非线程同步，不安全</td>
+<td style="text-align:center">线程同步，安全</td>
+</tr>
+<tr>
+<td>对null的处理</td>
+<td style="text-align:right">值不允许 null</td>
+<td style="text-align:center">值允许 null ,(一个或多个健对应该值)</td>
+</tr>
+<tr>
+<td>方法不同</td>
+<td style="text-align:right">contains(Object value)</td>
+<td style="text-align:center">containsValue(Object value)</td>
+</tr>
+<tr>
+<td>遍历</td>
+<td style="text-align:right">Enumeration</td>
+<td style="text-align:center">Iterator</td>
+</tr>
+<tr>
+<td>增长率</td>
+<td style="text-align:right">默认 11 ，old * 2+1</td>
+<td style="text-align:center">一定是2的指数</td>
+</tr>
+<tr>
+<td>哈希值的使用</td>
+<td style="text-align:right">直接使用对象的hashCode</td>
+<td style="text-align:center">重新计算hash值，而且用与代替求模</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ArrayMap"><a href="#ArrayMap" class="headerlink" title="ArrayMap"></a>ArrayMap</h2><p> 用两个数组来模拟Map，第一个数组存放存放item的hash值，第二数组是把key，value连续的存放在数组里，通过先算hash在第一个数组里找到它的hash index，根据这个index在去第二个数组里找到这个key-value。</p>
+<h2 id="ArrayList-LinkedList"><a href="#ArrayList-LinkedList" class="headerlink" title="ArrayList  LinkedList"></a>ArrayList  LinkedList</h2><p>1.ArrayList是实现了基于动态数组的数据结构，LinkedList基于链表的数据结构。<br>2.对于随机访问get和set，ArrayList觉得优于LinkedList，因为LinkedList要移动指针。<br>3.对于新增和删除操作add和remove，LinedList比较占优势，因为ArrayList要移动数据。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;int-和-Integer&quot;&gt;&lt;a href=&quot;#int-和-Integer&quot; class=&quot;headerlink&quot; title=&quot;int  和 Integer&quot;&gt;&lt;/a&gt;int  和 Integer&lt;/h2&gt;&lt;p&gt;Java 中的数据类型分为基本数据类型和复杂数据
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="http://junaya.cn/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据结构</title>
+    <link href="http://junaya.cn/2016/10/31/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <id>http://junaya.cn/2016/10/31/数据结构/</id>
+    <published>2016-10-31T15:46:50.000Z</published>
+    <updated>2016-11-07T15:47:23.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#数据结构</p>
+<h2 id="逻辑结构"><a href="#逻辑结构" class="headerlink" title="逻辑结构"></a>逻辑结构</h2><h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><p>一组属性相同的元素的集合</p>
+<h3 id="线性结构"><a href="#线性结构" class="headerlink" title="线性结构"></a>线性结构</h3><p>一对一</p>
+<h3 id="树形结构"><a href="#树形结构" class="headerlink" title="树形结构"></a>树形结构</h3><p>一对多</p>
+<h3 id="图形结构"><a href="#图形结构" class="headerlink" title="图形结构"></a>图形结构</h3><p>多对多</p>
+<h2 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h2><h3 id="顺序存储"><a href="#顺序存储" class="headerlink" title="顺序存储"></a>顺序存储</h3><blockquote>
+<p>数据元素存储在一片连续的存储区域<br>用数组实现，逻辑位置和物理位置保持一致</p>
+</blockquote>
+<h3 id="链式存储"><a href="#链式存储" class="headerlink" title="链式存储"></a>链式存储</h3><blockquote>
+<p>非连续的存储结构，它的逻辑位置和物理位置不是保持一致的。<br>节点保存的是该节点的值和逻辑关系指针</p>
+</blockquote>
+<h3 id="索引存储"><a href="#索引存储" class="headerlink" title="索引存储"></a>索引存储</h3><blockquote>
+<p>存储元素时还新增了一个索引列表，列表每一项包含关键字和数据元素存储地址或存储域的首地址</p>
+</blockquote>
+<h3 id="散列（哈希）存储"><a href="#散列（哈希）存储" class="headerlink" title="散列（哈希）存储"></a>散列（哈希）存储</h3><blockquote>
+<p>数据元素存放在一片连续的存储区域，每一个数据元素具体地址根据该数据元素的关键字的值通过散列（哈希）函数计算出来</p>
+</blockquote>
+<h1 id="线性表"><a href="#线性表" class="headerlink" title="线性表"></a>线性表</h1><p>线性表由 n (n&gt;=0)个数据元素所构成的有限序列<br>线性表属于线性结构</p>
+<blockquote>
+<ul>
+<li>开始节点（元素）没有前驱</li>
+<li>终端节点（元素）没有后继</li>
+<li>中间节点（元素）只有一个前驱和一个后继</li>
+</ul>
+</blockquote>
+<h2 id="线性表的顺序存储-顺序表"><a href="#线性表的顺序存储-顺序表" class="headerlink" title="线性表的顺序存储-顺序表"></a>线性表的顺序存储-顺序表</h2><blockquote>
+<p>顺序存储的线性表 , 用一组地址连续的存储单元一次存放线性表中的数据元素</p>
+</blockquote>
+<p>特点</p>
+<blockquote>
+<ul>
+<li>线性表中逻辑上相邻的元素在物理地址上也是相邻的</li>
+<li>存储密度高，需要预先分配足够的存储空间</li>
+<li>便于随机存取</li>
+<li>不便插入／删除 （会一起大量的数据元素的移动）</li>
+<li>用数组描述，顺序存储结构</li>
+</ul>
+</blockquote>
+<h2 id="线性表的链式存储-链表"><a href="#线性表的链式存储-链表" class="headerlink" title="线性表的链式存储-链表"></a>线性表的链式存储-链表</h2><blockquote>
+<p>概念：<br>链表是一种物理存储单元上非连续，非顺序的数据结构，数据元素的逻辑顺序是通过链表中的指针链接次序实现的。<br>组成：<br>一系列节点组成，可以在运行时动态生成（列表中每一个元素称为节点）<br>节点（元素）组成：<br>1，存储数据的数据域<br>2，存储下一个节点（元素）的指针域<br>时间复杂度<br>1，插入／删除  O（1）<br>2，查找一个节点／访问特定编号节点 O（n）<br>优点<br>克服数组需要需要预先知道数据大小的缺点，链表结构可以充分利用计算机内存空间，实现灵活的内存动态管理。<br>缺点<br> 没有数组随机读取优点，链表由于增加了节点指针域，空间开销表较大。链表允许插入和移除表上任意位置上的节点，但是不允许随机存取。<br>类型<br> 1，单向链表<br> 链表的方向是单向的。head 指针指向第一个成为表头节点，最后一个指向 null<br> 2，双向链表<br> 没个数据节点中有两个指针，分别指向直接后继和直接前驱，从任意节点可以访问它的前驱节点和后继节点<br> 3，循环链表<br>最后一个指针域指向头节点，整个链表形成一个环</p>
+</blockquote>
+<h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><blockquote>
+<p> 只从一端进一端出  汉诺塔<br>先进后出（FILO） ／ 后进先出（LIFO）</p>
+</blockquote>
+<h3 id="顺序栈"><a href="#顺序栈" class="headerlink" title="顺序栈"></a>顺序栈</h3><blockquote>
+<p>以数组实现<br>如栈需要注意栈是否已满<br>出栈需要注意栈是否为空</p>
+</blockquote>
+<h3 id="链式栈"><a href="#链式栈" class="headerlink" title="链式栈"></a>链式栈</h3><blockquote>
+<p>以单链表实现</p>
+<p>应用 ： 分割符匹配 ， 大数相加 ， 表达式求值 ， 栈与递归问题</p>
+</blockquote>
+<h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><blockquote>
+<p>从一端进从另一端出 ，排队买票<br>先进先出（FIFO)</p>
+</blockquote>
+<h3 id="循环顺序对列"><a href="#循环顺序对列" class="headerlink" title="循环顺序对列"></a>循环顺序对列</h3><blockquote>
+<p>数组实现<br>需要注意判断是否为空是否已满，已满可能是假满<br>1）少用一个存储单元，当容量为 maxSize ，队列空时 front == rear , 队列满时 front == (rear +1)%maxSize<br>2)设置一个标记为，flag 初始值为 0， 当入队成功 flag=1 ，当出队成功 flag = 0 ，<br> 所以当  队为空时 front == rear &amp;&amp; flag ==0 ,  队列满时 front == rear &amp;&amp;  flag = 1;<br>3）设置一个变量 num 当入队成功 num + 1 ,当出队成功 num - 1 ,队列为空时 num == 0  ,队列满时 num &gt; 0</p>
+</blockquote>
+<h3 id="链队"><a href="#链队" class="headerlink" title="链队"></a>链队</h3><blockquote>
+<p>单链表实现<br>注意出队时判断是否为null ，</p>
+</blockquote>
+<h3 id="优先级队列"><a href="#优先级队列" class="headerlink" title="优先级队列"></a>优先级队列</h3><blockquote>
+<p>根据数据元素的优先级排队</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#数据结构&lt;/p&gt;
+&lt;h2 id=&quot;逻辑结构&quot;&gt;&lt;a href=&quot;#逻辑结构&quot; class=&quot;headerlink&quot; title=&quot;逻辑结构&quot;&gt;&lt;/a&gt;逻辑结构&lt;/h2&gt;&lt;h3 id=&quot;集合&quot;&gt;&lt;a href=&quot;#集合&quot; class=&quot;headerlink&quot; title=&quot;
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://junaya.cn/tags/java/"/>
+    
+      <category term="数据结构" scheme="http://junaya.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>格物致知</title>
+    <link href="http://junaya.cn/2016/10/29/%E6%A0%BC%E7%89%A9%E8%87%B4%E7%9F%A5/"/>
+    <id>http://junaya.cn/2016/10/29/格物致知/</id>
+    <published>2016-10-29T15:52:38.000Z</published>
+    <updated>2016-11-07T15:47:25.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>大学之道，在明明德，在亲民，在止于至善。知止而后有定；定而后能静；静而后能安；安而后能虑；虑而后能得。物有本末，事有终始。知所先后，则近道矣。古之欲明明德于天下者，先治其国；欲治其国者，先齐其家； 欲齐其家者，先修其身；欲修其身者，先正其心；欲正其心者，先诚其意；欲诚其意者，先致其知；致知在格物。 物格而后知至；知至而后意诚；意诚而后心正；心正而后身修；身修而后家齐；家齐而后国治；国治而后天下平。 自天子以至于庶人，壹是皆以修身为本。其本乱而未治者否矣。其所厚者薄，而其所薄者厚，未之有也！</p>
+</blockquote>
+<p>这是一篇在大学语文课本中的文章，当时还背诵过，也真的背诵了，在老师面前，只是背诵了。前段时间在找工作中，每次回来先到图书馆去，看看知识点，然后再回来。在二楼的一进门的图书室，前排的书架上摆放的大多是古文之类的，在浏览的时候，看到了厚厚的大学.中庸这本书。翻开的第一眼就是，大学之道。。。然后就悄声读了一遍，突然就被打动了。打动了自己的当前的一个状态，对于学习以及工作等其他，感觉真实给了自己人生的一个警醒，或者惊醒。回首自己的一年多的工作，也回首自己这一路走来索受的教育以及自己所学掌握知识的一个程度，再是反省自己的一个学习态度，自我认可程度，以及工作实际的检验。</p>
+<p>今年算是自己的本命年吧，自己姑且这样安慰以下自己，是自己能力不行，智商跟不上情商也不够用。在面试的时候就完全显露出来。其实自己觉得这段时间成长了不少，反正自己肯定是能扛下来自己这个锅，对安卓以及知识的一个真正追求和渴望现在才自我明白。自己到底想要的是什么，并且确定自己要怎么走接下来的道路。但是，对于父母，自己真是于心不忍，一直以来他们都还没有明白我的工作是什么，也怪我没有讲明白。这段时间扰的父母也是一直担心我的工作，更是担心我的以后。他们当然是希望我能有一个安稳的生活和工作，起码他们的希望就是像公务员那样的生活，才算是稳定的。但是啊，我也终于明白自己为什么一直抵触体制的原因，但是就在中秋回家，亲人们的建议，我还心动了，毕竟他们讲到了人生的全部的规划。而我，最终也决定自己的追求，自己的所想要，渴望，目标。只是要安慰父母，让他们不要担心自己。</p>
+<p>在次期间迷茫了很多，真的很多，但是也在一次次鼓励自己要自己努力下去。期间工作一年的时间里，对于自己进步并不是很大。因为这一年间接的认识了很多佼佼者，比如晓锋，还有许建林。前几个月还跟晓锋发了邮件，并且很亲切认真的回我邮件了，后续还会跟他发邮件，还有啊他又开源了几个项目，初识他的时候也是通过开源项目 MeiZi 而认识他，阅读了他的所有文章，所以才对他很感兴趣，所以微博 GitHub 博客都会经常去看。许建林呢 就更有趣了， 参加 GDG 活动时认识的他，进去就跟他挨着坐着，感觉有点面熟，没认出来。后来他上去分享演讲时，才想起来，是他分享 RxJava 的主题。当时我就尴尬了，后来也去他的博客上看了他的文章，每一篇都很认真的写，很有专研劲儿，而且特别高产，谁让他是高材生呢。讲的有点偏了，以后可以写写认识的每一个人。</p>
+<p>大学期间没有真正的学习数据结构，现在做了一段时间的程序开发，再回过头来看这些基础知识，就会想到再语言中怎么使用，再哪些场景中使用。比如面试中定会有问道 ArrayList 和 LinkedList 的知识，他们的实现一个是用顺序存储实现线性表数据的存储，LinkedList 是由链表存储实现线性表数据存储，两者的区别就是 用于数据的操作场景下的不同， ArrayList 实现随机存取方便，但是插入删除耗费。 LinkedList 方便插入和删除操作，但是随机取某一元素都要从头开始找。 这样我就明白为什么在安卓中，获取数据的时候要用<br>List<data> dataList = new ArrayList()&lt;&gt;; 的使用原因。</data></p>
+<p>所以呢，格物致知， 就是理解事物的底层，一层层的刨析原理这样才能建起高楼。这道理从小就开始接受，但是一直没能真正的领悟，这真理还得自己体会领悟。所以给自己的目标就是，从基础开始，回炉再造。这也是阅读了 《Android 艺术开发探索》得出来的感悟，因为要走远必须要有扎实的基础。这就是我的格物致知。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;大学之道，在明明德，在亲民，在止于至善。知止而后有定；定而后能静；静而后能安；安而后能虑；虑而后能得。物有本末，事有终始。知所先后，则近道矣。古之欲明明德于天下者，先治其国；欲治其国者，先齐其家； 欲齐其家者，先修其身；欲修其身者，先正其心；欲正其
+    
+    </summary>
+    
+      <category term="life" scheme="http://junaya.cn/categories/life/"/>
+    
+    
+      <category term="随笔" scheme="http://junaya.cn/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+      <category term="感悟" scheme="http://junaya.cn/tags/%E6%84%9F%E6%82%9F/"/>
+    
+  </entry>
+  
+</feed>
